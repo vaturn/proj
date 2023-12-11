@@ -16,6 +16,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
@@ -38,6 +39,7 @@ import com.kakao.vectormap.KakaoMapReadyCallback;
 import com.kakao.vectormap.LatLng;
 import com.kakao.vectormap.MapLifeCycleCallback;
 import com.kakao.vectormap.MapView;
+import com.kakao.vectormap.animation.Interpolation;
 import com.kakao.vectormap.camera.CameraAnimation;
 import com.kakao.vectormap.camera.CameraUpdate;
 import com.kakao.vectormap.camera.CameraUpdateFactory;
@@ -47,6 +49,14 @@ import com.kakao.vectormap.label.LabelStyle;
 import com.kakao.vectormap.label.LabelStyles;
 import com.kakao.vectormap.label.LabelTransition;
 import com.kakao.vectormap.label.Transition;
+import com.kakao.vectormap.shape.DotPoints;
+import com.kakao.vectormap.shape.Polygon;
+import com.kakao.vectormap.shape.PolygonOptions;
+import com.kakao.vectormap.shape.PolygonStyles;
+import com.kakao.vectormap.shape.PolygonStylesSet;
+import com.kakao.vectormap.shape.ShapeAnimator;
+import com.kakao.vectormap.shape.animation.CircleWave;
+import com.kakao.vectormap.shape.animation.CircleWaves;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -91,6 +101,8 @@ public class MapActivity extends AppCompatActivity {
     private ActionBarDrawerToggle actionBarDrawerToggle;
     LatLng labelLocation;
     LabelLayer labelLayer;
+    private Polygon animationPolygon;
+    private ShapeAnimator shapeAnimator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +111,6 @@ public class MapActivity extends AppCompatActivity {
 
         Button btn_address_search = findViewById(R.id.btn_address_search);
         final EditText et_address_search = findViewById(R.id.et_address_search);
-//        Button btn_report = findViewById(R.id.btn_report);
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -346,6 +357,22 @@ public class MapActivity extends AppCompatActivity {
             if (labelLayer != null) {
                 // 라벨 생성
                 labelLayer.addLabel(LabelOptions.from(labelId, labelPosition).setStyles(styles));
+                // circleWave 애니메이션을 위한 Polygon 및 Animator 미리 생성
+                animationPolygon = kakaoMap.getShapeManager().getLayer().addPolygon(
+                        PolygonOptions.from("circlePolygon")
+                                .setDotPoints(DotPoints.fromCircle(labelPosition, 1.0f))
+                                .setStylesSet(PolygonStylesSet.from(
+                                        PolygonStyles.from(Color.parseColor("#f55d44")))));
+
+                CircleWaves circleWaves = CircleWaves.from("circleWaveAnim",
+                                CircleWave.from(1, 0, 0, 200))
+                        .setHideShapeAtStop(false)
+                        .setInterpolation(Interpolation.CubicInOut)
+                        .setDuration(1500).setRepeatCount(100);
+                shapeAnimator = kakaoMap.getShapeManager().addAnimator(circleWaves);
+                shapeAnimator.addPolygons(animationPolygon);
+                shapeAnimator.setHideShapeAtStop(true);
+                shapeAnimator.start();
             }
             else{
                 Toast.makeText(MapActivity.this, "labelLayer error.", Toast.LENGTH_SHORT).show();

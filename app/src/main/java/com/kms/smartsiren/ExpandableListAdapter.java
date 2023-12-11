@@ -125,6 +125,7 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 });
                 break;
             case CHILD1:
+                //B
                 final ListChildViewHolder childHolder1 = (ListChildViewHolder) holder;
                 childHolder1.refferalItem = item;
                 childHolder1.child_title.setText(item.text);
@@ -176,12 +177,14 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
     private static class ListChildViewHolder extends RecyclerView.ViewHolder {
         public TextView child_title;
+        //B
         public Button btn_reportMap;
         public Item refferalItem;
 
         public ListChildViewHolder(View itemView) {
             super(itemView);
             child_title = (TextView) itemView.findViewById(R.id.child_title);
+            //B
             btn_reportMap = (Button) itemView.findViewById((R.id.btn_reportMap));
         }
     }

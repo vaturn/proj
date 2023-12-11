@@ -1,3 +1,4 @@
+//B
 package com.kms.smartsiren;
 
 import android.Manifest;

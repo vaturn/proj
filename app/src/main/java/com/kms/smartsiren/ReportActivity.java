@@ -81,9 +81,8 @@ public class ReportActivity extends AppCompatActivity {
         header3.invisibleChildren.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD3, ""));
         data.add(header3);
 
-
-
-//        recyclerview.addItemDecoration(new RecyclerViewDecoration(30));
+        //recyclerview.addItemDecoration(new RecyclerViewDecoration(30));
+        //B
         ExpandableListAdapter adapter = new ExpandableListAdapter(data, new ExpandableListAdapter.OnChildItemClickListener() {
             @Override
             public void onChildItemClick() {
@@ -106,6 +105,7 @@ public class ReportActivity extends AppCompatActivity {
         });
     }
 
+    //B
     private void showReportConfirmationDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("신고 접수가 완료되었습니다.")
@@ -141,6 +141,7 @@ public class ReportActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //B
     private final ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
