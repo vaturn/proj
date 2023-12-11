@@ -8,8 +8,8 @@ public class UnconfirmedCase extends CaseInfo{
 
     public UnconfirmedCase(){}
 
-    public UnconfirmedCase(double latitude, double longitude, int category, int rating, String detail, String informant) {
-        super(latitude, longitude, category, rating, detail);
+    public UnconfirmedCase(double latitude, double longitude, int category, int rating, String detail, String informant, String uuid) {
+        super(latitude, longitude, category, rating, detail, uuid);
         this.informants = new ArrayList<>();
         this.informants.add(informant);
         this.personnel = this.informants.size();

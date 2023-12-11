@@ -74,7 +74,7 @@ FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         } else {
             // No user is signed in
 
-        }
+        }git
         로그인 했는지 안했는지 검사
  */
 public class MapActivity extends AppCompatActivity {

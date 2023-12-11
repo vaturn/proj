@@ -6,18 +6,24 @@ public class CaseInfo {
     private int category; //사건 분류
     private int rating; //위험 등급
     private String detail; // 사건 정보
-    //private String UUID;
+    private String uuid;
 
     public CaseInfo(){}
 
-    public CaseInfo(double latitude, double longitude, int category, int rating, String detail) {
+    public CaseInfo(double latitude, double longitude, int category, int rating, String detail, String uuid) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.category = category;
         this.rating = rating;
         this.detail = detail;
+        this.uuid = uuid;
+    }
+    public double calculateManhattanDistance(CaseInfo otherPoint) {
+        return Math.abs(this.latitude - otherPoint.latitude) +
+                Math.abs(this.longitude - otherPoint.longitude);
     }
 
+    /*
     public int getDistance(){
         int dis = 0;
         switch (category){
@@ -37,7 +43,7 @@ public class CaseInfo {
                 break;
         }
         return dis;
-    }
+    }*/
 
     public double getLatitude() {
         return latitude;
@@ -59,7 +65,7 @@ public class CaseInfo {
         return category;
     }
 
-    public void setCategory(char category) {
+    public void setCategory(int category) {
         this.category = category;
     }
 
@@ -67,7 +73,7 @@ public class CaseInfo {
         return rating;
     }
 
-    public void setRating(char rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 
@@ -77,5 +83,13 @@ public class CaseInfo {
 
     public void setDetail(String detail) {
         this.detail = detail;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 }

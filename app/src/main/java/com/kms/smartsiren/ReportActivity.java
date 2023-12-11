@@ -65,7 +65,7 @@ public class ReportActivity extends AppCompatActivity {
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UnconfirmedCase A = new UnconfirmedCase(1.1, 2.1, 1, 2, "자세히",  "testing");
+                UnconfirmedCase A = new UnconfirmedCase(1.1, 2.1, 1, 2, "자세히",  "testing","aaav");
                 A.addReport(1.2, 2.4, "test_2");
                 mDatabaseRef.child("CaseInfo").setValue(A);
                 // Show '신고 접수가 완료되었습니다.' popup
