@@ -3,6 +3,7 @@ package com.kms.smartsiren;
 public class CaseInfo {
     private double latitude; // 위도
     private double longitude; // 경도
+<<<<<<< HEAD
     private int category; //사건 분류
     private int rating; //위험 등급
     private String detail; // 사건 정보
@@ -11,6 +12,15 @@ public class CaseInfo {
     public CaseInfo(){}
 
     public CaseInfo(double latitude, double longitude, int category, int rating, String detail) {
+=======
+    private char category; //사건 분류
+    private char rating; //위험 등급
+    private String detail; // 사건 정보
+
+    public CaseInfo(){}
+
+    public CaseInfo(double latitude, double longitude, char category, char rating, String detail) {
+>>>>>>> test
         this.latitude = latitude;
         this.longitude = longitude;
         this.category = category;
@@ -21,6 +31,7 @@ public class CaseInfo {
     public int getDistance(){
         int dis = 0;
         switch (category){
+<<<<<<< HEAD
             case 1:
                 break;
             case 2:
@@ -32,6 +43,19 @@ public class CaseInfo {
             case 5:
                 break;
             case 6:
+=======
+            case 'A':
+                break;
+            case 'B':
+                break;
+            case 'C':
+                break;
+            case 'D':
+                break;
+            case 'E':
+                break;
+            case 'F':
+>>>>>>> test
                 break;
             default:
                 break;
@@ -55,7 +79,11 @@ public class CaseInfo {
         this.longitude = longitude;
     }
 
+<<<<<<< HEAD
     public int getCategory() {
+=======
+    public char getCategory() {
+>>>>>>> test
         return category;
     }
 
@@ -63,7 +91,11 @@ public class CaseInfo {
         this.category = category;
     }
 
+<<<<<<< HEAD
     public int getRating() {
+=======
+    public char getRating() {
+>>>>>>> test
         return rating;
     }
 

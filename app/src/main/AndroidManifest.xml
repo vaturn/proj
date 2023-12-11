@@ -26,17 +26,32 @@
         <activity
             android:name=".ReportActivity"
             android:exported="true" />
+<<<<<<< HEAD
 
         <meta-data
             android:name="com.kakao.vectormap.APP_KEY"
             android:value="1c232654d4bff3f2343c75132a2468d8" />
+=======
+        <activity
+            android:name=".ReportMapActivity"
+            android:exported="true"/>
+
+        <meta-data
+            android:name="com.kakao.vectormap.APP_KEY"
+            android:value="7b8bc26162c143f3d3dd73137a89fb95" />
+>>>>>>> test
 
         <activity
             android:name=".LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait">
+<<<<<<< HEAD
 
         </activity>
+=======
+        </activity>
+
+>>>>>>> test
         <activity
             android:name=".MapActivity"
             android:exported="true">

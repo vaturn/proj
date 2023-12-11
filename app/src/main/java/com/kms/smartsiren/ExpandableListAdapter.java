@@ -1,6 +1,13 @@
 package com.kms.smartsiren;
 
+<<<<<<< HEAD
 import android.content.Context;
+=======
+import static android.content.Intent.getIntent;
+
+import android.content.Context;
+import android.content.Intent;
+>>>>>>> test
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,10 +31,24 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     private List<Item> data;
 
+<<<<<<< HEAD
     public ExpandableListAdapter(List<Item> data) {
         this.data = data;
     }
 
+=======
+    private OnChildItemClickListener childItemClickListener;
+
+    // 인터페이스 정의
+    public interface OnChildItemClickListener {
+        void onChildItemClick();
+    }
+
+    public ExpandableListAdapter(List<Item> data, OnChildItemClickListener listener) {
+        this.data = data;
+        this.childItemClickListener = listener;
+    }
+>>>>>>> test
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int type) {
@@ -115,11 +136,35 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 });
                 break;
             case CHILD1:
+<<<<<<< HEAD
             case CHILD2:
             case CHILD3:
                 final ListChildViewHolder childHolder = (ListChildViewHolder) holder;
                 childHolder.refferalItem = item;
                 childHolder.child_title.setText(item.text);
+=======
+                //B
+                final ListChildViewHolder childHolder1 = (ListChildViewHolder) holder;
+                childHolder1.refferalItem = item;
+                childHolder1.child_title.setText(item.text);
+                // 버튼 클릭 리스너 설정
+                if (childHolder1.btn_reportMap != null) {
+                    childHolder1.btn_reportMap.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (childItemClickListener != null) {
+                                childItemClickListener.onChildItemClick();
+                            }
+                        }
+                    });
+                }
+                break;
+            case CHILD2:
+            case CHILD3:
+                final ListChildViewHolder childHolder3 = (ListChildViewHolder) holder;
+                childHolder3.refferalItem = item;
+                childHolder3.child_title.setText(item.text);
+>>>>>>> test
                 // Perform additional tasks for CHILD1, CHILD2, CHILD3 if needed
                 break;
         }
@@ -151,12 +196,22 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
     private static class ListChildViewHolder extends RecyclerView.ViewHolder {
         public TextView child_title;
+<<<<<<< HEAD
         public Button btn;
+=======
+        //B
+        public Button btn_reportMap;
+>>>>>>> test
         public Item refferalItem;
 
         public ListChildViewHolder(View itemView) {
             super(itemView);
             child_title = (TextView) itemView.findViewById(R.id.child_title);
+<<<<<<< HEAD
+=======
+            //B
+            btn_reportMap = (Button) itemView.findViewById((R.id.btn_reportMap));
+>>>>>>> test
         }
     }
 

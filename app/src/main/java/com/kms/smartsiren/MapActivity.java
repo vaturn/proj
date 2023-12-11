@@ -16,6 +16,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+<<<<<<< HEAD
+=======
+import android.graphics.Color;
+>>>>>>> test
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
@@ -38,6 +42,10 @@ import com.kakao.vectormap.KakaoMapReadyCallback;
 import com.kakao.vectormap.LatLng;
 import com.kakao.vectormap.MapLifeCycleCallback;
 import com.kakao.vectormap.MapView;
+<<<<<<< HEAD
+=======
+import com.kakao.vectormap.animation.Interpolation;
+>>>>>>> test
 import com.kakao.vectormap.camera.CameraAnimation;
 import com.kakao.vectormap.camera.CameraUpdate;
 import com.kakao.vectormap.camera.CameraUpdateFactory;
@@ -47,6 +55,17 @@ import com.kakao.vectormap.label.LabelStyle;
 import com.kakao.vectormap.label.LabelStyles;
 import com.kakao.vectormap.label.LabelTransition;
 import com.kakao.vectormap.label.Transition;
+<<<<<<< HEAD
+=======
+import com.kakao.vectormap.shape.DotPoints;
+import com.kakao.vectormap.shape.Polygon;
+import com.kakao.vectormap.shape.PolygonOptions;
+import com.kakao.vectormap.shape.PolygonStyles;
+import com.kakao.vectormap.shape.PolygonStylesSet;
+import com.kakao.vectormap.shape.ShapeAnimator;
+import com.kakao.vectormap.shape.animation.CircleWave;
+import com.kakao.vectormap.shape.animation.CircleWaves;
+>>>>>>> test
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -91,6 +110,11 @@ public class MapActivity extends AppCompatActivity {
     private ActionBarDrawerToggle actionBarDrawerToggle;
     LatLng labelLocation;
     LabelLayer labelLayer;
+<<<<<<< HEAD
+=======
+    private Polygon animationPolygon;
+    private ShapeAnimator shapeAnimator;
+>>>>>>> test
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +123,10 @@ public class MapActivity extends AppCompatActivity {
 
         Button btn_address_search = findViewById(R.id.btn_address_search);
         final EditText et_address_search = findViewById(R.id.et_address_search);
+<<<<<<< HEAD
 //        Button btn_report = findViewById(R.id.btn_report);
+=======
+>>>>>>> test
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -271,7 +298,12 @@ public class MapActivity extends AppCompatActivity {
                     }
                     //Showing the latitude, longitude and accuracy on the home screen.
                     for (Location location : locationResult.getLocations()) {
+<<<<<<< HEAD
 
+=======
+                        // 현재위치 저장하기(LocationManager)
+                        LocationManager.getInstance().setCurrentLocation(location);
+>>>>>>> test
                         //현재위치 버튼 눌렀을 때 작동하는 부분
                         btn_current_location.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -335,6 +367,10 @@ public class MapActivity extends AppCompatActivity {
         }
     }
 
+<<<<<<< HEAD
+=======
+    //위험 위치 표시 라벨 추가하는 함수
+>>>>>>> test
     private void DangerLabel(String labelId, LatLng labelPosition) {
         if (labelPosition != null) {
             // 라벨 스타일 생성
@@ -344,6 +380,25 @@ public class MapActivity extends AppCompatActivity {
             if (labelLayer != null) {
                 // 라벨 생성
                 labelLayer.addLabel(LabelOptions.from(labelId, labelPosition).setStyles(styles));
+<<<<<<< HEAD
+=======
+                // circleWave 애니메이션을 위한 Polygon 및 Animator 미리 생성
+                animationPolygon = kakaoMap.getShapeManager().getLayer().addPolygon(
+                        PolygonOptions.from("circlePolygon")
+                                .setDotPoints(DotPoints.fromCircle(labelPosition, 1.0f))
+                                .setStylesSet(PolygonStylesSet.from(
+                                        PolygonStyles.from(Color.parseColor("#f55d44")))));
+
+                CircleWaves circleWaves = CircleWaves.from("circleWaveAnim",
+                                CircleWave.from(1, 0, 0, 200))
+                        .setHideShapeAtStop(false)
+                        .setInterpolation(Interpolation.CubicInOut)
+                        .setDuration(1500).setRepeatCount(100);
+                shapeAnimator = kakaoMap.getShapeManager().addAnimator(circleWaves);
+                shapeAnimator.addPolygons(animationPolygon);
+                shapeAnimator.setHideShapeAtStop(true);
+                shapeAnimator.start();
+>>>>>>> test
             }
             else{
                 Toast.makeText(MapActivity.this, "labelLayer error.", Toast.LENGTH_SHORT).show();
