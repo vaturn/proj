@@ -39,7 +39,6 @@ public class ReportMapActivity extends AppCompatActivity {
     private FusedLocationProviderClient fusedLocationClient; //위치 서비스 클라이언트 객체
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     LatLng reportLocation;
-    Button btn_current_location_R;
     Button btn_report_location_R;
 
     @Override
@@ -51,8 +50,6 @@ public class ReportMapActivity extends AppCompatActivity {
 
         mapView = findViewById(R.id.map_view_R);
 
-
-        btn_current_location_R = findViewById(R.id.btn_current_location_R);
         btn_report_location_R = findViewById(R.id.btn_report_location_R);
 
 
@@ -89,13 +86,6 @@ public class ReportMapActivity extends AppCompatActivity {
             }
         });
 
-        btn_current_location_R.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mapView.setVisibility(View.VISIBLE);
-            }
-        });
-
         btn_report_location_R.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,7 +103,6 @@ public class ReportMapActivity extends AppCompatActivity {
             }
         });
     }
-
 
     @SuppressLint("MissingPermission")
     private void getLastLocation() {

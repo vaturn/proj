@@ -20,19 +20,11 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<<<<<<< HEAD
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="148dp"
-        android:layout_height="21dp"
-        android:text="현재 위치 출력"
-=======
     <Button
         android:id="@+id/btn_reportMap"
         android:layout_width="148dp"
         android:layout_height="40dp"
         android:text="신고 위치 지정하기"
->>>>>>> test
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,8 +45,6 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/room" />
 
-<<<<<<< HEAD
-=======
     <com.kakao.vectormap.MapView
         android:id="@+id/map_view"
         android:layout_width="match_parent"
@@ -64,5 +54,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
->>>>>>> test
 </androidx.constraintlayout.widget.ConstraintLayout>

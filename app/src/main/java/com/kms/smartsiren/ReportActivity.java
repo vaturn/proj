@@ -1,9 +1,5 @@
 package com.kms.smartsiren;
 
-<<<<<<< HEAD
-import android.content.DialogInterface;
-import android.content.Intent;
-=======
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -11,23 +7,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
->>>>>>> test
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-<<<<<<< HEAD
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-=======
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -55,17 +38,10 @@ import com.kakao.vectormap.camera.CameraUpdate;
 import com.kakao.vectormap.camera.CameraUpdateFactory;
 
 import java.text.MessageFormat;
->>>>>>> test
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReportActivity extends AppCompatActivity {
-<<<<<<< HEAD
-
-    private RecyclerView recyclerview;
-    private Button button4;
-    private DatabaseReference mDatabaseRef;
-=======
     private KakaoMap kakaoMap;
     MapView mapView;
     private FusedLocationProviderClient fusedLocationClient; //위치 서비스 클라이언트 객체
@@ -74,18 +50,12 @@ public class ReportActivity extends AppCompatActivity {
     private Double selectedLongitude = null;
     private RecyclerView recyclerview;
     private Button button4;
->>>>>>> test
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report);
 
-<<<<<<< HEAD
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("SmartSiren");
-
-=======
->>>>>>> test
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -111,10 +81,6 @@ public class ReportActivity extends AppCompatActivity {
         header3.invisibleChildren.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD3, ""));
         data.add(header3);
 
-<<<<<<< HEAD
-//        recyclerview.addItemDecoration(new RecyclerViewDecoration(30));
-        recyclerview.setAdapter(new ExpandableListAdapter(data));
-=======
         //recyclerview.addItemDecoration(new RecyclerViewDecoration(30));
         //B
         ExpandableListAdapter adapter = new ExpandableListAdapter(data, new ExpandableListAdapter.OnChildItemClickListener() {
@@ -127,48 +93,26 @@ public class ReportActivity extends AppCompatActivity {
         });
         recyclerview.setAdapter(adapter);
 
->>>>>>> test
 
         // Handle button4 click event
         button4 = findViewById(R.id.button4);
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-<<<<<<< HEAD
-                UnconfirmedCase A = new UnconfirmedCase(1.1, 2.1, 1, 2, "자세히",  "testing");
-                A.addReport(1.2, 2.4, "test_2");
-                mDatabaseRef.child("CaseInfo").setValue(A);
                 // Show '신고 접수가 완료되었습니다.' popup
                 showReportConfirmationDialog();
-
-=======
-                // Show '신고 접수가 완료되었습니다.' popup
-                showReportConfirmationDialog();
->>>>>>> test
             }
         });
     }
 
-<<<<<<< HEAD
-    private void showReportConfirmationDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-
-=======
     //B
     private void showReportConfirmationDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
->>>>>>> test
         builder.setMessage("신고 접수가 완료되었습니다.")
                 .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Switch to 'map' activity
-<<<<<<< HEAD
-                        Intent intent = new Intent(ReportActivity.this, MapActivity.class);
-                        startActivity(intent);
-                        finish();
-=======
                         // 위도와 경도가 선택되었는지 확인
                         if(selectedLatitude != null && selectedLongitude != null) {
                             Intent returnIntent = new Intent();
@@ -179,7 +123,6 @@ public class ReportActivity extends AppCompatActivity {
                         } else {
                             Toast.makeText(ReportActivity.this, "위치가 설정되지 않았습니다. 지도에서 위치를 선택해주세요.", Toast.LENGTH_SHORT).show();
                         }
->>>>>>> test
                     }
                 })
                 .show();
@@ -197,8 +140,6 @@ public class ReportActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-<<<<<<< HEAD
-=======
 
     //B
     private final ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
@@ -212,5 +153,4 @@ public class ReportActivity extends AppCompatActivity {
                 }
             }
     );
->>>>>>> test
 }
