@@ -10,6 +10,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,15 +39,29 @@ import com.kakao.vectormap.label.LabelStyles;
 import com.kakao.vectormap.label.LabelTransition;
 import com.kakao.vectormap.label.Transition;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.text.MessageFormat;
 
 public class ReportMapActivity extends AppCompatActivity {
     private KakaoMap kakaoMap;
     MapView mapView;
     private FusedLocationProviderClient fusedLocationClient; //위치 서비스 클라이언트 객체
+    private static final String GEOCODE_URL = "http://dapi.kakao.com/v2/local/search/address.json?query=";
+    //Rest API 키, 테스트할려면 바꿔야 함.
+    private static final String GEOCODE_USER_INFO = "KakaoAK 1dd2a83a90a775ff04216aa9b7a36ee8";
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     LatLng reportLocation;
     Button btn_report_location_R;
+    Button btn_address_search_R;
+    EditText et_address_search_R;
     Label centerLabel;
     LabelLayer labelLayer;
 
@@ -60,6 +75,8 @@ public class ReportMapActivity extends AppCompatActivity {
         mapView = findViewById(R.id.map_view_R);
 
         btn_report_location_R = findViewById(R.id.btn_report_location_R);
+        btn_address_search_R = findViewById(R.id.btn_address_search_R);
+        et_address_search_R = findViewById(R.id.et_address_search_R);
 
         mapView.start(new MapLifeCycleCallback() {
             @Override
@@ -111,6 +128,16 @@ public class ReportMapActivity extends AppCompatActivity {
                 }
             }
         });
+
+        btn_address_search_R.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String address = et_address_search_R.getText().toString();
+                new Thread(() -> {
+                    LocationSearch(address); // network 동작, 인터넷에서 xml을 받아오는 코드
+                }).start();
+            }
+        });
     }
 
     @SuppressLint("MissingPermission")
@@ -124,12 +151,12 @@ public class ReportMapActivity extends AppCompatActivity {
                     CameraUpdate cameraUpdate = CameraUpdateFactory.newCenterPosition(LatLng.from(location.getLatitude(), location.getLongitude()));
                     // 지도의 카메라 위치를 업데이트
                     kakaoMap.moveCamera(cameraUpdate, CameraAnimation.from(500, true, true));
+                    //신고위치 지정 label
+                    LabelStyles styles = kakaoMap.getLabelManager()
+                            .addLabelStyles(LabelStyles.from(LabelStyle.from(R.drawable.pink_marker).setAnchorPoint(0.5f, 0.5f)));
 
-//                    LabelStyles styles = kakaoMap.getLabelManager()
-//                            .addLabelStyles(LabelStyles.from(LabelStyle.from(R.drawable.pink_marker)
-//                                    .setIconTransition(LabelTransition.from(Transition.None, Transition.None))));
                     centerLabel = labelLayer.addLabel(LabelOptions.from("centerLabel", LatLng.from(location.getLatitude(), location.getLongitude()))
-                            .setStyles(LabelStyle.from(R.drawable.pink_marker).setAnchorPoint(0.5f, 0.5f))
+                            .setStyles(styles)
                             .setRank(1));
                 }
             }
@@ -141,9 +168,10 @@ public class ReportMapActivity extends AppCompatActivity {
             @Override
             public void onCameraMoveEnd(@NonNull KakaoMap kakaoMap, @NonNull CameraPosition position, @NonNull GestureType gestureType) {
                 // CameraPosition 파라미터 값
-                // 카메라 움직임이 끝난 후 위치 업데이
-
+                // 카메라 움직임이 끝난 후 위치 업데이트
                 reportLocation = position.getPosition();
+
+                //위치 변경에 따른 라벨 이동
                 centerLabel.moveTo(LatLng.from(reportLocation.latitude, reportLocation.longitude));
 
                 Toast.makeText(
@@ -153,5 +181,47 @@ public class ReportMapActivity extends AppCompatActivity {
                 ).show();
             }
         });
+    }
+
+    //주소 받아오고 해당 주소 위도,경도 받고 카메라 조정
+    public void LocationSearch(String address) {
+
+        try {
+            String encodedAddress = URLEncoder.encode(address, "UTF-8");
+            URL obj = new URL(GEOCODE_URL + encodedAddress);
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+            con.setRequestMethod("GET");
+            con.setRequestProperty("Authorization", GEOCODE_USER_INFO);
+            con.setRequestProperty("content-type", "application/json");
+            con.setDoOutput(true);
+            con.setUseCaches(false);
+            con.setDefaultUseCaches(false);
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream(), Charset.forName("UTF-8")));
+
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+
+            String jsonResponse = response.toString();
+
+            JSONObject jsonObject = new JSONObject(jsonResponse);
+            JSONArray documentsArray = jsonObject.getJSONArray("documents");
+
+            if (documentsArray.length() > 0) {
+                JSONObject firstDocument = documentsArray.getJSONObject(0);
+                double latitude = Double.parseDouble(firstDocument.getString("y"));
+                double longitude = Double.parseDouble(firstDocument.getString("x"));
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newCenterPosition(LatLng.from(latitude, longitude));
+                // 지도의 카메라 위치를 업데이트
+                kakaoMap.moveCamera(cameraUpdate, CameraAnimation.from(500, true, true));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

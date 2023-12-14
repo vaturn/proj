@@ -51,21 +51,28 @@
             app:layout_constraintVertical_bias="0.082">
         </View>
 
-        <!-- 검색 창 -->
-        <EditText
-            android:id="@+id/et_address_search"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:hint="검색어 입력" />
-
-        <!-- 검색 버튼 -->
-        <Button
-            android:id="@+id/btn_address_search"
+        <!-- 검색창과 검색 버튼을 포함하는 레이아웃 -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="검색"/>
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <!-- 검색 창 -->
+            <EditText
+                android:id="@+id/et_address_search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="검색어 입력" />
+
+            <!-- 검색 버튼 -->
+            <Button
+                android:id="@+id/btn_address_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="검색"/>
+        </LinearLayout>
 
         <!-- 현재 위치로 이동 버튼 -->
         <Button
@@ -86,8 +93,6 @@
             android:textColor="#ffffff"
             android:textSize="20sp"
             android:textStyle="bold" />
-
-
 
     </LinearLayout>
 
