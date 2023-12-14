@@ -30,6 +30,13 @@ import com.kakao.vectormap.camera.CameraAnimation;
 import com.kakao.vectormap.camera.CameraPosition;
 import com.kakao.vectormap.camera.CameraUpdate;
 import com.kakao.vectormap.camera.CameraUpdateFactory;
+import com.kakao.vectormap.label.Label;
+import com.kakao.vectormap.label.LabelLayer;
+import com.kakao.vectormap.label.LabelOptions;
+import com.kakao.vectormap.label.LabelStyle;
+import com.kakao.vectormap.label.LabelStyles;
+import com.kakao.vectormap.label.LabelTransition;
+import com.kakao.vectormap.label.Transition;
 
 import java.text.MessageFormat;
 
@@ -40,6 +47,8 @@ public class ReportMapActivity extends AppCompatActivity {
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     LatLng reportLocation;
     Button btn_report_location_R;
+    Label centerLabel;
+    LabelLayer labelLayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +60,6 @@ public class ReportMapActivity extends AppCompatActivity {
         mapView = findViewById(R.id.map_view_R);
 
         btn_report_location_R = findViewById(R.id.btn_report_location_R);
-
 
         mapView.start(new MapLifeCycleCallback() {
             @Override
@@ -77,6 +85,7 @@ public class ReportMapActivity extends AppCompatActivity {
             public void onMapReady(KakaoMap Map) {
                 // 인증 후 API 가 정상적으로 실행될 때 호출됨
                 kakaoMap = Map;
+                labelLayer = kakaoMap.getLabelManager().getLayer();
                 if (ContextCompat.checkSelfPermission(ReportMapActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(ReportMapActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
                 } else {
@@ -115,6 +124,13 @@ public class ReportMapActivity extends AppCompatActivity {
                     CameraUpdate cameraUpdate = CameraUpdateFactory.newCenterPosition(LatLng.from(location.getLatitude(), location.getLongitude()));
                     // 지도의 카메라 위치를 업데이트
                     kakaoMap.moveCamera(cameraUpdate, CameraAnimation.from(500, true, true));
+
+//                    LabelStyles styles = kakaoMap.getLabelManager()
+//                            .addLabelStyles(LabelStyles.from(LabelStyle.from(R.drawable.pink_marker)
+//                                    .setIconTransition(LabelTransition.from(Transition.None, Transition.None))));
+                    centerLabel = labelLayer.addLabel(LabelOptions.from("centerLabel", LatLng.from(location.getLatitude(), location.getLongitude()))
+                            .setStyles(LabelStyle.from(R.drawable.pink_marker).setAnchorPoint(0.5f, 0.5f))
+                            .setRank(1));
                 }
             }
         });
@@ -125,8 +141,10 @@ public class ReportMapActivity extends AppCompatActivity {
             @Override
             public void onCameraMoveEnd(@NonNull KakaoMap kakaoMap, @NonNull CameraPosition position, @NonNull GestureType gestureType) {
                 // CameraPosition 파라미터 값
-                // 카메라 움직임이 끝난 후 위치 업데이트
+                // 카메라 움직임이 끝난 후 위치 업데이
+
                 reportLocation = position.getPosition();
+                centerLabel.moveTo(LatLng.from(reportLocation.latitude, reportLocation.longitude));
 
                 Toast.makeText(
                         ReportMapActivity.this,
