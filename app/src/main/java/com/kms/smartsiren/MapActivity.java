@@ -43,6 +43,7 @@ import com.kakao.vectormap.animation.Interpolation;
 import com.kakao.vectormap.camera.CameraAnimation;
 import com.kakao.vectormap.camera.CameraUpdate;
 import com.kakao.vectormap.camera.CameraUpdateFactory;
+import com.kakao.vectormap.label.Label;
 import com.kakao.vectormap.label.LabelLayer;
 import com.kakao.vectormap.label.LabelOptions;
 import com.kakao.vectormap.label.LabelStyle;
@@ -100,6 +101,7 @@ public class MapActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     LatLng labelLocation;
+    Label centerLabel;
     LabelLayer labelLayer;
     private Polygon animationPolygon;
     private ShapeAnimator shapeAnimator;
@@ -263,6 +265,10 @@ public class MapActivity extends AppCompatActivity {
                     CameraUpdate cameraUpdate = CameraUpdateFactory.newCenterPosition(LatLng.from(location.getLatitude(), location.getLongitude()));
                     // 지도의 카메라 위치를 업데이트
                     kakaoMap.moveCamera(cameraUpdate, CameraAnimation.from(500, true, true));
+
+                    centerLabel = labelLayer.addLabel(LabelOptions.from("centerLabel", LatLng.from(location.getLatitude(), location.getLongitude()))
+                            .setStyles(LabelStyle.from(R.drawable.pink_marker).setAnchorPoint(0.5f, 0.5f))
+                            .setRank(1));
                 }
             }
         });
@@ -284,6 +290,7 @@ public class MapActivity extends AppCompatActivity {
                     for (Location location : locationResult.getLocations()) {
                         // 현재위치 저장하기(LocationManager)
                         LocationManager.getInstance().setCurrentLocation(location);
+                        centerLabel.moveTo(LatLng.from(location.getLatitude(), location.getLongitude()));
                         //현재위치 버튼 눌렀을 때 작동하는 부분
                         btn_current_location.setOnClickListener(new View.OnClickListener() {
                             @Override
