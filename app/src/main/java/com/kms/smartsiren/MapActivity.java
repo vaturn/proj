@@ -66,6 +66,9 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Map;
+
 import android.Manifest;
 import android.view.MenuItem;
 import android.view.View;
@@ -100,11 +103,11 @@ public class MapActivity extends AppCompatActivity {
     LocationRequest locationRequest;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
-    LatLng labelLocation;
     Label centerLabel;
     LabelLayer labelLayer;
     private Polygon animationPolygon;
     private ShapeAnimator shapeAnimator;
+    private Map<String, PolygonStylesSet> reportCaseToPolygonStylesMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +121,7 @@ public class MapActivity extends AppCompatActivity {
 
         MapView mapView = findViewById(R.id.map_view);
         createLocationRequest();
+        createReportCaseToPolygonStylesMap();
 
         Toolbar toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
@@ -354,8 +358,16 @@ public class MapActivity extends AppCompatActivity {
         }
     }
 
-    //위험 위치 표시 라벨 추가하는 웨이브 추가 함수
-    private void DangerLabelWave(LatLng labelPosition) {
+    // 신고 케이스별 circlewave 색설정을 초기화하는 메소드
+    private void createReportCaseToPolygonStylesMap() {
+        reportCaseToPolygonStylesMap.put("reportCase1", PolygonStylesSet.from(PolygonStyles.from(Color.parseColor("#ff0000")))); // 빨간색
+        reportCaseToPolygonStylesMap.put("reportCase2", PolygonStylesSet.from(PolygonStyles.from(Color.parseColor("#00ff00")))); // 초록색
+        reportCaseToPolygonStylesMap.put("reportCase3", PolygonStylesSet.from(PolygonStyles.from(Color.parseColor("#0000ff")))); // 파란색
+        // 필요에 따라 추가 케이스를 여기에 추가
+    }
+
+    //위험 위치 표시 라벨 추가하는 웨이브 추가 메소드
+    private void DangerLabelWave(LatLng labelPosition, String reportCase) {
         if (labelPosition != null) {
             // 라벨 스타일 생성
             LabelStyles styles = kakaoMap.getLabelManager()
@@ -368,14 +380,13 @@ public class MapActivity extends AppCompatActivity {
                 animationPolygon = kakaoMap.getShapeManager().getLayer().addPolygon(
                         PolygonOptions.from("circlePolygon_"+ System.currentTimeMillis())
                                 .setDotPoints(DotPoints.fromCircle(labelPosition, 1.0f))
-                                .setStylesSet(PolygonStylesSet.from(
-                                        PolygonStyles.from(Color.parseColor("#f55d44")))));
-
+                                .setStylesSet(reportCaseToPolygonStylesMap.get(reportCase)));
+                // circleWave 실제 생성 부분
                 CircleWaves circleWaves = CircleWaves.from("circleWaveAnim_"+ System.currentTimeMillis(),
                                 CircleWave.from(1, 0, 0, 200))
                         .setHideShapeAtStop(false)
                         .setInterpolation(Interpolation.CubicInOut)
-                        .setDuration(1500).setRepeatCount(100);
+                        .setDuration(3000).setRepeatCount(1600);
                 shapeAnimator = kakaoMap.getShapeManager().addAnimator(circleWaves);
                 shapeAnimator.addPolygons(animationPolygon);
                 shapeAnimator.setHideShapeAtStop(true);
@@ -399,8 +410,9 @@ public class MapActivity extends AppCompatActivity {
                     if(data!=null) {
                         double latitude = data.getDoubleExtra("latitude", 0.0);
                         double longitude = data.getDoubleExtra("longitude", 0.0);
-                        labelLocation = LatLng.from(latitude, longitude);
-                        DangerLabelWave(labelLocation);
+                        LatLng labelLocation = LatLng.from(latitude, longitude);
+                        String temporaryReportCase = "reportCase1";
+                        DangerLabelWave(labelLocation,temporaryReportCase);
                     }
                 }
             }

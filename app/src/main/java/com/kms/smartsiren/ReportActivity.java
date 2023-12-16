@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -45,7 +46,7 @@ public class ReportActivity extends AppCompatActivity {
     private KakaoMap kakaoMap;
     MapView mapView;
     private FusedLocationProviderClient fusedLocationClient; //위치 서비스 클라이언트 객체
-    private static final int REQUEST_LOCATION_PERMISSION = 1;
+    private static final int REQUEST_SEND_SMS = 1;
     private Double selectedLatitude = null;
     private Double selectedLongitude = null;
     private RecyclerView recyclerview;
@@ -126,6 +127,11 @@ public class ReportActivity extends AppCompatActivity {
                     }
                 })
                 .show();
+    }
+
+    private void sendSMS(String phoneNumber, String message) {
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(phoneNumber, null, message, null, null);
     }
 
     @Override

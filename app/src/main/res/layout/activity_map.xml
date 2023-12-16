@@ -66,7 +66,7 @@
                 android:layout_weight="1"
                 android:hint="검색어 입력" />
 
-            <!-- 검색 버튼 -->
+            <!-- 검색 버튼 -->-
             <Button
                 android:id="@+id/btn_address_search"
                 android:layout_width="wrap_content"
