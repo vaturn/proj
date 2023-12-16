@@ -40,7 +40,7 @@ public class TestActivity extends AppCompatActivity {
             public void onClick(View view) {
                 double l = Double.parseDouble(et_long.getText().toString().trim());
                 double r = Double.parseDouble(et_rat.getText().toString().trim());
-                CaseInfo A = new CaseInfo(l, r, 1, 2, "자세히", String.valueOf(UUID.randomUUID()));
+                CaseInfo A = new CaseInfo(l, r, "...", 2, "자세히", String.valueOf(UUID.randomUUID()));
                 mDatabaseRef.child("CaseInfo").child(A.getUuid()).setValue(A);
             }
         });
