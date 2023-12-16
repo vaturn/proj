@@ -34,6 +34,12 @@ import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.kakao.vectormap.KakaoMap;
 import com.kakao.vectormap.KakaoMapReadyCallback;
 import com.kakao.vectormap.LatLng;
@@ -70,6 +76,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.Manifest;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -151,6 +158,31 @@ public class MapActivity extends AppCompatActivity {
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open_drawer, R.string.close_drawer);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
+
+
+        // 데이터 베이스에서 위험지역 가져오기
+        DatabaseReference databaseReference;
+        databaseReference = FirebaseDatabase.getInstance().getReference("SmartSiren");
+
+        Query mergeCaseQuery = databaseReference.child("CaseInfo");
+
+        mergeCaseQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    // 가져온 CaseInfo
+                    CaseInfo child = postSnapshot.getValue(CaseInfo.class);
+                    DangerLabelWave(LatLng.from(child.getLatitude(),child.getLongitude()), "reportCase1"/*child.getCategory()*/);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                // ...
+            }
+        });
+
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
