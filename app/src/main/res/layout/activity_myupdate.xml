@@ -7,6 +7,20 @@
     android:layout_height="match_parent">
 
 
+    <TextView
+        android:id="@+id/textView30"
+        android:layout_width="345dp"
+        android:layout_height="69dp"
+        android:text="여기에 신고정보(신고제목, 장소, 날짜 등) 표시할거임"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.283"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.559" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
@@ -32,21 +46,20 @@
 
     <ImageView
         android:id="@+id/imageView9"
-        android:layout_width="380dp"
-        android:layout_height="178dp"
+        android:layout_width="373dp"
+        android:layout_height="168dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.175"
+        app:layout_constraintVertical_bias="0.187"
         app:srcCompat="@drawable/mat" />
 
     <TextView
-        android:id="@+id/textView27"
+        android:id="@+id/text_DBname2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="내 신고"
+        android:text="김예진"
         android:textColor="@color/black"
         android:textSize="18dp"
         android:textStyle="bold"
@@ -58,7 +71,21 @@
         app:layout_constraintVertical_bias="0.177" />
 
     <TextView
-        android:id="@+id/textView28"
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="님의 신고현황 입니다."
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.389"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.177" />
+
+    <TextView
+        android:id="@+id/text_DB1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
@@ -73,7 +100,7 @@
         app:layout_constraintVertical_bias="0.300" />
 
     <TextView
-        android:id="@+id/textView31"
+        android:id="@+id/text_DB2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
@@ -88,7 +115,7 @@
         app:layout_constraintVertical_bias="0.30" />
 
     <TextView
-        android:id="@+id/textView29"
+        android:id="@+id/text_DB3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
@@ -103,7 +130,7 @@
         app:layout_constraintVertical_bias="0.300" />
 
     <TextView
-        android:id="@+id/textView30"
+        android:id="@+id/text_DB4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"

@@ -3,22 +3,18 @@ package com.example.smartsiren;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class useredit extends AppCompatActivity {
-
-    Button okbtn;
+public class AppguideActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.useredit);
+        setContentView(R.layout.activity_appgudie);
 
-        Toolbar toolbar = findViewById(R.id.Toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -26,19 +22,6 @@ public class useredit extends AppCompatActivity {
         // 뒤로가기 버튼 활성화
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        // okbtn을 레이아웃 파일에서 찾음
-        okbtn = findViewById(R.id.OKbtn);
-
-        // okbtn에 클릭 리스너 설정
-        okbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // useredit2 클래스로 이동하는 Intent 생성
-                Intent intent = new Intent(useredit.this, useredit2.class);
-                startActivity(intent);
-            }
-        });
     }
 
     @Override
@@ -46,7 +29,7 @@ public class useredit extends AppCompatActivity {
         int id = item.getItemId();
         if (id == android.R.id.home) {
             // 뒤로가기 버튼을 눌렀을 때의 동작
-            Intent intent = new Intent(this, map.class);
+            Intent intent = new Intent(this, MapActivity.class);
             startActivity(intent);
             return true;
         }

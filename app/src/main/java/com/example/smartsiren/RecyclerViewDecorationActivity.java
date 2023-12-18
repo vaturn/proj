@@ -5,11 +5,11 @@ import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-public class RecyclerViewDecoration extends RecyclerView.ItemDecoration {
+public class RecyclerViewDecorationActivity extends RecyclerView.ItemDecoration {
 
     private final int divHeight;
 
-    public RecyclerViewDecoration(int divHeight)
+    public RecyclerViewDecorationActivity(int divHeight)
     {
         this.divHeight = divHeight;
     }

@@ -8,30 +8,30 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     Button btn_login;
     Button btn_signup;
-    EditText editTextId; // 아이디 입력란
-    EditText editTextPw; // 비밀번호 입력란
+    EditText et_email; // 아이디 입력란
+    EditText et_pwd; // 비밀번호 입력란
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        setContentView(R.layout.activity_login);
 
-        btn_login = findViewById(R.id.login_btn);
-        btn_signup = findViewById(R.id.signup_btn);
-        editTextId = findViewById(R.id.edit_id);
-        editTextPw = findViewById(R.id.edit_pwd);
+        btn_login = findViewById(R.id.btn_login);
+        btn_signup = findViewById(R.id.btn_register);
+        et_email = findViewById(R.id.et_email);
+        et_pwd = findViewById(R.id.et_pwd);
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String enteredId = editTextId.getText().toString().trim();
-                String enteredPw = editTextPw.getText().toString().trim();
+                String email = et_email.getText().toString().trim();
+                String pwd = et_pwd.getText().toString().trim();
 
-                Intent intent = new Intent(getApplicationContext(), map.class);
+                Intent intent = new Intent(getApplicationContext(), MapActivity.class);
                 startActivity(intent);
                 finish();
 //                if (TextUtils.isEmpty(enteredId) && TextUtils.isEmpty(enteredPw)) {
@@ -54,7 +54,7 @@ public class login extends AppCompatActivity {
         btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), signup.class);
+                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(intent);
             }
         });

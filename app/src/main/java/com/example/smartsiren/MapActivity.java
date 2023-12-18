@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-public class map extends AppCompatActivity {
+public class MapActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -23,15 +23,15 @@ public class map extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.map_main);
+        setContentView(R.layout.activity_map_main);
 
         Toolbar toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        TextView navLogout = findViewById(R.id.nav_logout);
-        navLogout.setOnClickListener(new View.OnClickListener() {
+        TextView text_logout = findViewById(R.id.text_logout);
+        text_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Show logout confirmation dialog
@@ -39,29 +39,29 @@ public class map extends AppCompatActivity {
             }
         });
 
-        TextView navLogout3 = findViewById(R.id.nav_logout3);
-        navLogout3.setOnClickListener(new View.OnClickListener() {
+        TextView text_appguide = findViewById(R.id.text_appguide);
+        text_appguide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(map.this, appgudie.class);
+                Intent intent = new Intent(MapActivity.this, AppguideActivity.class);
                 startActivity(intent);
             }
         });
 
-        TextView navLogout2 = findViewById(R.id.nav_logout2);
-        navLogout2.setOnClickListener(new View.OnClickListener() {
+        TextView text_useredit = findViewById(R.id.text_useredit);
+        text_useredit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(map.this, useredit.class);
+                Intent intent = new Intent(MapActivity.this, UsereditActivity.class);
                 startActivity(intent);
             }
         });
 
-        TextView navLogout1 = findViewById(R.id.nav_logout1);
-        navLogout1.setOnClickListener(new View.OnClickListener() {
+        TextView text_myupdate = findViewById(R.id.text_myupdate);
+        text_myupdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(map.this, myupdate.class);
+                Intent intent = new Intent(MapActivity.this, MyupdateActivity.class);
                 startActivity(intent);
             }
         });
@@ -75,12 +75,12 @@ public class map extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        Button goButton = findViewById(R.id.go_btn); // Replace 'go_btn' with your actual button ID
+        Button goButton = findViewById(R.id.btn_report); // Replace 'go_btn' with your actual button ID
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Start 'report' activity when the button is clicked
-                Intent intent = new Intent(map.this, report.class);
+                Intent intent = new Intent(MapActivity.this, ReportActivity.class);
                 startActivity(intent);
             }
         });
@@ -103,7 +103,7 @@ public class map extends AppCompatActivity {
                 .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(map.this, login.class);
+                        Intent intent = new Intent(MapActivity.this, LoginActivity.class);
                         startActivity(intent);
                         // 로그아웃 후 현재 액티비티를 종료하려면 아래 코드를 추가합니다.
                         finish();

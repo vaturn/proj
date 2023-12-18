@@ -8,22 +8,20 @@
     android:layout_height="match_parent">
 
 
-    <android.widget.Button
-        android:id="@+id/OKbtn"
-        android:layout_width="360dp"
-        android:layout_height="52dp"
-        android:background="@drawable/main_item_button"
-        android:backgroundTint="@color/material_dynamic_primary30"
-        android:text="확인"
-        android:textAlignment="center"
-        android:textColor="#ffffff"
-        android:textSize="16sp"
-        android:textStyle="bold"
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="82dp"
+        android:layout_height="82dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/sss"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.911" />
+        app:layout_constraintVertical_bias="0.211"></ImageView>
 
     <TextView
         android:id="@+id/textView17"
@@ -37,22 +35,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.303" />
-
-    <EditText
-        android:id="@+id/signuppw3"
-        android:layout_width="360dp"
-        android:layout_height="50dp"
-        android:background="@drawable/edittext_rounded_corner_rectangle"
-        android:hint="비밀번호를 입력하세요."
-        android:paddingStart="16dp"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.569" />
+        app:layout_constraintVertical_bias="0.326" />
 
     <TextView
         android:id="@+id/textView18"
@@ -64,22 +47,7 @@
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35" />
-
-    <EditText
-        android:id="@+id/signupemail2"
-        android:layout_width="360dp"
-        android:layout_height="50dp"
-        android:background="@drawable/edittext_rounded_corner_rectangle"
-        android:hint="123@naver.com"
-        android:paddingStart="16dp"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.471" />
+        app:layout_constraintVertical_bias="0.373" />
 
     <TextView
         android:id="@+id/textView19"
@@ -91,7 +59,7 @@
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.38" />
+        app:layout_constraintVertical_bias="0.402" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/Toolbar"
@@ -126,6 +94,60 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.082" />
+
+
+    <!-- 입력 불가능 -->
+
+    <EditText
+        android:id="@+id/et_DBemail"
+        android:layout_width="360dp"
+        android:layout_height="50dp"
+        android:background="@drawable/edittext"
+        android:focusableInTouchMode="false"
+        android:hint="kimyejin12@naver.com"
+        android:paddingStart="16dp"
+        android:textColorHint="#ff000000"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.496" />
+
+    <EditText
+        android:id="@+id/et_pw_chk"
+        android:layout_width="360dp"
+        android:layout_height="50dp"
+        android:background="@drawable/edittext_rounded_corner_rectangle"
+        android:hint="비밀번호를 입력하세요."
+        android:inputType="textPassword"
+        android:paddingStart="16dp"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.594" />
+
+
+    <android.widget.Button
+        android:id="@+id/btn_useredit"
+        android:layout_width="360dp"
+        android:layout_height="52dp"
+        android:background="@drawable/main_item_button"
+        android:backgroundTint="@color/material_dynamic_primary30"
+        android:text="확인"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.911" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

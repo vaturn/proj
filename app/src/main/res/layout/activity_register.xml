@@ -9,13 +9,14 @@
 
 
     <EditText
-        android:id="@+id/signuppw"
+        android:id="@+id/et_pwd"
         android:layout_width="329dp"
         android:layout_height="50dp"
         android:background="@drawable/edittext_rounded_corner_rectangle"
         android:hint="비밀번호를 입력하세요."
         android:paddingStart="16dp"
         android:textSize="14sp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,13 +24,14 @@
         app:layout_constraintVertical_bias="0.535" />
 
     <EditText
-        android:id="@+id/signuppw2"
+        android:id="@+id/et_pwd_chk"
         android:layout_width="329dp"
         android:layout_height="50dp"
         android:background="@drawable/edittext_rounded_corner_rectangle"
         android:hint="비밀번호를 확인하세요."
         android:paddingStart="16dp"
         android:textSize="14sp"
+        android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +78,7 @@
         app:layout_constraintVertical_bias="0.482" />
 
     <EditText
-        android:id="@+id/signupname"
+        android:id="@+id/et_name"
         android:layout_width="329dp"
         android:layout_height="50dp"
         android:background="@drawable/edittext_rounded_corner_rectangle"
@@ -91,13 +93,14 @@
         app:layout_constraintVertical_bias="0.262" />
 
     <EditText
-        android:id="@+id/signupemail"
+        android:id="@+id/et_email"
         android:layout_width="329dp"
         android:layout_height="50dp"
         android:background="@drawable/edittext_rounded_corner_rectangle"
         android:hint="이메일을 입력하세요."
         android:paddingStart="16dp"
         android:textSize="14sp"
+        android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -151,7 +154,7 @@
         app:layout_constraintVertical_bias="0.082" />
 
     <android.widget.Button
-        android:id="@+id/signupbutton"
+        android:id="@+id/btn_register"
         android:layout_width="325dp"
         android:layout_height="54dp"
         android:background="@drawable/main_item_button"
@@ -169,3 +172,6 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+

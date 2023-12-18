@@ -7,12 +7,12 @@ import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class appgudie extends AppCompatActivity {
+public class MyupdateActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.appgudie);
+        setContentView(R.layout.activity_myupdate);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -29,7 +29,7 @@ public class appgudie extends AppCompatActivity {
         int id = item.getItemId();
         if (id == android.R.id.home) {
             // 뒤로가기 버튼을 눌렀을 때의 동작
-            Intent intent = new Intent(this, map.class);
+            Intent intent = new Intent(this, MapActivity.class);
             startActivity(intent);
             return true;
         }

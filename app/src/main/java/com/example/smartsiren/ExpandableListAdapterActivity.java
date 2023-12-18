@@ -13,11 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ExpandableListAdapterActivity extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public static final int HEADER1 = 0;
     public static final int HEADER2 = 1;
-
     public static final int HEADER3 = 2;
+
     public static final int CHILD1 = 3;
     public static final int CHILD2 = 4;
     public static final int CHILD3 = 5;
@@ -26,7 +26,7 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public List<Button> buttons;
 
-    public ExpandableListAdapter(List<Item> data) {
+    public ExpandableListAdapterActivity(List<Item> data) {
         this.data = data;
     }
 
@@ -127,7 +127,7 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 childViewHolder.buttons = new ArrayList<>();
 
                 for (int i = 1; i <= 6; i++) {
-                    int buttonId = childViewHolder.itemView.getResources().getIdentifier("danbtn" + i, "id",
+                    int buttonId = childViewHolder.itemView.getResources().getIdentifier("btn_dan" + i, "id",
                             childViewHolder.itemView.getContext().getPackageName());
                     Button button = childViewHolder.itemView.findViewById(buttonId);
                     childViewHolder.buttons.add(button);

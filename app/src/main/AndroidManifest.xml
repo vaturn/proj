@@ -11,13 +11,13 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
-            android:name=".report"
+            android:name=".ReportActivity"
             android:exported="false" />
         <activity
-            android:name=".login"
+            android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".start"
+            android:name=".StartActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"> <!-- Adjusted placement of the closing angle bracket -->
             <intent-filter>
@@ -27,22 +27,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".signup"
+            android:name=".RegisterActivity"
             android:exported="true" />
         <activity
-            android:name=".map"
+            android:name=".MapActivity"
             android:exported="true" />
         <activity
-            android:name=".appgudie"
+            android:name=".AppguideActivity"
             android:exported="true" />
         <activity
-            android:name=".useredit"
+            android:name=".UsereditActivity"
             android:exported="true" />
         <activity
-            android:name=".myupdate"
+            android:name=".MyupdateActivity"
             android:exported="true" />
         <activity
-            android:name=".useredit2"
+            android:name=".Useredit2Activity"
+            android:exported="true" />
+        <activity
+            android:name=".UserwithdrawActivity"
             android:exported="true" />
     </application>
 
