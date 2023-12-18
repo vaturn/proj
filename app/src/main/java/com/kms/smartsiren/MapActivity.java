@@ -106,11 +106,14 @@ public class MapActivity extends AppCompatActivity {
     private Polygon animationPolygon;
     private ShapeAnimator shapeAnimator;
     private Map<String, PolygonStylesSet> reportCaseToPolygonStylesMap = new HashMap<>();
+    private FirebaseAuth mFirebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
 
         Button btn_address_search = findViewById(R.id.btn_current_location);
         final EditText et_address_search = findViewById(R.id.et_address_search);
@@ -136,6 +139,7 @@ public class MapActivity extends AppCompatActivity {
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                mFirebaseAuth.signOut();
                                 Intent intent = new Intent(MapActivity.this, LoginActivity.class); // Replace LoginActivity with your actual login activity class
                                 startActivity(intent);
                                 finish();
@@ -451,7 +455,7 @@ public class MapActivity extends AppCompatActivity {
             Toast.makeText(MapActivity.this, "위치를 찾지 못 했습니다.", Toast.LENGTH_SHORT).show();
         }
     }
-    /*
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -459,15 +463,16 @@ public class MapActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) {
             // 로그인 안됨
+            Log.e("MainMap","회원 정보 로딩 실패");
             Intent intent = new Intent(MapActivity.this, LoginActivity.class); // 실제로 사용하는 로그인 액티비티 클래스로 교체
             startActivity(intent);
             finish();
         }
         else{
-            Log.e("???",user.getDisplayName());
+            Log.e("MainMap","로그인 성공");
         }
     }
-    */
+
 
 }
 
