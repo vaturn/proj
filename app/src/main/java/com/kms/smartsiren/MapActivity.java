@@ -36,6 +36,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -188,24 +189,33 @@ public class MapActivity extends AppCompatActivity {
 
         Query mergeCaseQuery = databaseReference.child("CaseInfo");
 
-        mergeCaseQuery.addValueEventListener(new ValueEventListener() {
+        mergeCaseQuery.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    // 가져온 CaseInfo
-                    CaseInfo child = postSnapshot.getValue(CaseInfo.class);
-                    DangerLabelWave(LatLng.from(child.getLatitude(),child.getLongitude()), "reportCase1");
-                }
+            public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
+                CaseInfo child = dataSnapshot.getValue(CaseInfo.class);
+                DangerLabelWave(LatLng.from(child.getLatitude(),child.getLongitude()), "reportCase1");
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                // ...
+            public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
-
-
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);

@@ -3,9 +3,10 @@ package com.kms.smartsiren;
 public class ReliabilityModel {
     final static public int USER_RELIABILITY_DEFAULT = 400;
     final static public int TRUSTWORTHY_RANK_DEFAULT = 10000;
+    final static public int RELIABILITY_CRITICAL_VALUE = 14;
     final public int CRITICALSIZE = 3;
 
-    public int getUserReliability(int G, int N){
+    public static int getUserReliability(int G, int N){
         if(N == 0)
             return USER_RELIABILITY_DEFAULT;
 

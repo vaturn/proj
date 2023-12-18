@@ -36,7 +36,13 @@
             android:exported="false" />
         <activity
             android:name=".ThumbnailActivity"
-            android:exported="true" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ReportActivity"
             android:exported="true" />
@@ -55,11 +61,7 @@
         <activity
             android:name=".MapActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".RegisterActivity"
@@ -67,7 +69,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".TestActivity"
-            android:exported="true" />
+            android:exported="true">
+
+        </activity>
 
         <service
             android:name=".FCM"
