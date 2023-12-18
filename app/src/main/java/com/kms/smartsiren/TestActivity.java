@@ -49,7 +49,7 @@ public class TestActivity extends AppCompatActivity {
             public void onClick(View view) {
                 double l = Double.parseDouble(et_long.getText().toString().trim());
                 double r = Double.parseDouble(et_rat.getText().toString().trim());
-                UnconfirmedCase a = new UnconfirmedCase(l, r, 1,2,"안녕","abc","avdcdcas");
+                UnconfirmedCase a = new UnconfirmedCase(l, r, "1",2,"안녕","abc","avdcdcas");
                 KNNAlgorithm MUC = new KNNAlgorithm();
                 MUC.startLabeling(a, new KNNAlgorithm.MyCallback(){
                     @Override

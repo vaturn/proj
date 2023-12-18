@@ -139,8 +139,6 @@ public class ReportActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == android.R.id.home) {
             // 뒤로가기 버튼을 눌렀을 때의 동작 설정
-            Intent intent = new Intent(this, MapActivity.class); // 'go'에서 'map'으로 이동
-            startActivity(intent);
             finish();
             return true;
         }

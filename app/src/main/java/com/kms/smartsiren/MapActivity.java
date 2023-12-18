@@ -89,24 +89,13 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-/*
-FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            // User is signed in
-
-        } else {
-            // No user is signed in
-
-        }
-        로그인 했는지 안했는지 검사
- */
 public class MapActivity extends AppCompatActivity {
 
     private KakaoMap kakaoMap;
     private FusedLocationProviderClient fusedLocationClient;
     private static final String GEOCODE_URL = "http://dapi.kakao.com/v2/local/search/address.json?query=";
     //Rest API 키, 테스트할려면 바꿔야 함.
-    private static final String GEOCODE_USER_INFO = "KakaoAK 1dd2a83a90a775ff04216aa9b7a36ee8";
+    private static final String GEOCODE_USER_INFO = "KakaoAK 34a0d68415a4c446c7c907b81b64a078";
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     protected static final int REQUEST_CHECK_SETTINGS = 0x1;
     LocationRequest locationRequest;
@@ -123,15 +112,7 @@ public class MapActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user == null) {
-            // 로그인 안됨
-            Intent intent = new Intent(MapActivity.this, LoginActivity.class); // Replace LoginActivity with your actual login activity class
-            startActivity(intent);
-            finish();
-        }
-
-        Button btn_address_search = findViewById(R.id.btn_address_search);
+        Button btn_address_search = findViewById(R.id.btn_current_location);
         final EditText et_address_search = findViewById(R.id.et_address_search);
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -145,7 +126,7 @@ public class MapActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        TextView navLogout = findViewById(R.id.nav_logout);
+        TextView navLogout = findViewById(R.id.text_logout);
         navLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,6 +142,33 @@ public class MapActivity extends AppCompatActivity {
                             }
                         })
                         .show();
+            }
+        });
+
+        TextView text_appguide = findViewById(R.id.text_appguide);
+        text_appguide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MapActivity.this, AppguideActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        TextView text_useredit = findViewById(R.id.text_useredit);
+        text_useredit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MapActivity.this, UserEditActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        TextView text_myupdate = findViewById(R.id.text_myupdate);
+        text_myupdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MapActivity.this, MyupdateActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -182,7 +190,7 @@ public class MapActivity extends AppCompatActivity {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     // 가져온 CaseInfo
                     CaseInfo child = postSnapshot.getValue(CaseInfo.class);
-                    DangerLabelWave(LatLng.from(child.getLatitude(),child.getLongitude()), "reportCase1"/*child.getCategory()*/);
+                    DangerLabelWave(LatLng.from(child.getLatitude(),child.getLongitude()), "reportCase1");
                 }
             }
 
@@ -194,15 +202,16 @@ public class MapActivity extends AppCompatActivity {
         });
 
 
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        Button goButton = findViewById(R.id.go_btn);
+        Button goButton = findViewById(R.id.btn_report);
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MapActivity.this, ReportActivity.class); // Replace ReportActivity with your actual report activity class
-                getReportLocation.launch(intent);
+                startActivity(intent);
             }
         });
 
@@ -442,24 +451,23 @@ public class MapActivity extends AppCompatActivity {
             Toast.makeText(MapActivity.this, "위치를 찾지 못 했습니다.", Toast.LENGTH_SHORT).show();
         }
     }
+    /*
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-    private final ActivityResultLauncher<Intent> getReportLocation = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if(result.getResultCode() == RESULT_OK){
-                    // todo - ...
-                    Intent data = result.getData();
-                    if(data!=null) {
-                        double latitude = data.getDoubleExtra("latitude", 0.0);
-                        double longitude = data.getDoubleExtra("longitude", 0.0);
-                        LatLng labelLocation = LatLng.from(latitude, longitude);
-                        String temporaryReportCase = "reportCase1";
-                        DangerLabelWave(labelLocation,temporaryReportCase);
-                    }
-                }
-            }
-    );
-
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            // 로그인 안됨
+            Intent intent = new Intent(MapActivity.this, LoginActivity.class); // 실제로 사용하는 로그인 액티비티 클래스로 교체
+            startActivity(intent);
+            finish();
+        }
+        else{
+            Log.e("???",user.getDisplayName());
+        }
+    }
+    */
 
 }
 
