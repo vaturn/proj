@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawerView"
     android:layout_width="280dp"
     android:layout_height="match_parent"
     android:layout_gravity="start"
     android:background="@color/white"
     android:orientation="vertical">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,153 +17,114 @@
 
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/imageView"
             android:layout_width="114dp"
             android:layout_height="115dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="84dp"
-            android:layout_marginEnd="82dp"
-            android:layout_marginBottom="525dp"
-            android:background="@drawable/user" />
+            android:layout_marginStart="83dp"
+            android:layout_marginEnd="83dp"
+            android:layout_marginBottom="626dp"
+            android:background="@drawable/user"></ImageView>
 
         <TextView
-            android:id="@+id/nav_logout6"
+            android:id="@+id/text2"
             android:layout_width="29dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="164dp"
-            android:layout_marginEnd="87dp"
-            android:layout_marginBottom="477dp"
+            android:layout_marginStart="160dp"
+            android:layout_marginEnd="91dp"
+            android:layout_marginBottom="569dp"
             android:onClick="OnClick"
             android:text="님"
             android:textColor="@color/white"
-            android:textSize="24sp" />
+            android:textSize="24sp"></TextView>
 
         <TextView
-            android:id="@+id/nav_logout4"
-            android:layout_width="191dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="45dp"
-            android:layout_marginEnd="44dp"
-            android:layout_marginBottom="450dp"
-            android:onClick="OnClick"
-            android:text="오늘도 안전한 하루 보내세요!"
-            android:textColor="@color/white"
-            android:textSize="15dp" />
-
-        <TextView
-            android:id="@+id/nav_logout5"
+            android:id="@+id/text_DBname1"
             android:layout_width="73dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="91dp"
-            android:layout_marginEnd="116dp"
-            android:layout_marginBottom="477dp"
+            android:layout_marginStart="87dp"
+            android:layout_marginEnd="120dp"
+            android:layout_marginBottom="569dp"
             android:onClick="OnClick"
             android:text="김예진"
             android:textColor="@color/white"
             android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"></TextView>
 
         <TextView
-            android:id="@+id/nav_logout3"
+            android:id="@+id/text1"
+            android:layout_width="191dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="41dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="542dp"
+            android:onClick="OnClick"
+            android:text="오늘도 안전한 하루 보내세요!"
+            android:textColor="@color/white"
+            android:textSize="15dp"></TextView>
+
+        <TextView
+            android:id="@+id/text_appguide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="149dp"
-            android:layout_marginBottom="371dp"
+            android:layout_marginEnd="175dp"
+            android:layout_marginBottom="370dp"
             android:onClick="OnClick"
             android:text="앱 이용안내"
             android:textColor="#000000"
-            android:textSize="15dp" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="235dp"
-            android:layout_marginBottom="369dp"
-            android:background="@drawable/error" />
+            android:textSize="16dp"></TextView>
 
         <TextView
-            android:id="@+id/nav_logout"
+            android:id="@+id/text_myupdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="164dp"
-            android:layout_marginBottom="178dp"
-            android:onClick="OnClick"
-            android:text="로그아웃"
-            android:textColor="#000000"
-            android:textSize="15dp" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="233dp"
-            android:layout_marginBottom="176dp"
-            android:background="@drawable/logout" />
-
-        <TextView
-            android:id="@+id/nav_logout7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="140dp"
-            android:layout_marginBottom="244dp"
+            android:layout_marginEnd="165dp"
+            android:layout_marginBottom="308dp"
             android:onClick="OnClick"
             android:text="나의신고현황"
             android:textColor="#000000"
-            android:textSize="15dp" />
-
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="234dp"
-            android:layout_marginBottom="242dp"
-            android:background="@drawable/report" />
+            android:textSize="16dp"></TextView>
 
         <TextView
-            android:id="@+id/nav_logout2"
+            android:id="@+id/text_useredit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="141dp"
-            android:layout_marginBottom="308dp"
+            android:layout_marginEnd="167dp"
+            android:layout_marginBottom="246dp"
             android:onClick="OnClick"
             android:text="회원정보수정"
             android:textColor="#000000"
-            android:textSize="15dp" />
+            android:textSize="16dp"></TextView>
 
-        <ImageView
+        <TextView
+            android:id="@+id/text_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="235dp"
-            android:layout_marginBottom="305dp"
-            android:background="@drawable/set" />
+            android:layout_marginEnd="196dp"
+            android:layout_marginBottom="185dp"
+            android:onClick="OnClick"
+            android:text="로그아웃"
+            android:textColor="#000000"
+            android:textSize="16dp"></TextView>
 
     </RelativeLayout>
 
