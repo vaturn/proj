@@ -100,8 +100,17 @@ public class ReportActivity extends AppCompatActivity {
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Show '신고 접수가 완료되었습니다.' popup
-                showReportConfirmationDialog();
+                // Switch to 'map' activity
+                // 위도와 경도가 선택되었는지 확인
+                if(selectedLatitude != null && selectedLongitude != null) {
+                    // Show '신고 접수가 완료되었습니다.' popup
+
+
+
+                    showReportConfirmationDialog();
+                } else {
+                    Toast.makeText(ReportActivity.this, "위치가 설정되지 않았습니다. 지도에서 위치를 선택해주세요.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -113,17 +122,10 @@ public class ReportActivity extends AppCompatActivity {
                 .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Switch to 'map' activity
-                        // 위도와 경도가 선택되었는지 확인
-                        if(selectedLatitude != null && selectedLongitude != null) {
-                            Intent returnIntent = new Intent();
-                            returnIntent.putExtra("latitude", selectedLatitude);
-                            returnIntent.putExtra("longitude", selectedLongitude);
-                            setResult(Activity.RESULT_OK, returnIntent);
-                            finish(); // 액티비티 종료
-                        } else {
-                            Toast.makeText(ReportActivity.this, "위치가 설정되지 않았습니다. 지도에서 위치를 선택해주세요.", Toast.LENGTH_SHORT).show();
-                        }
+
+
+
+                        finish(); // 액티비티 종료
                     }
                 })
                 .show();

@@ -100,11 +100,4 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private final ActivityResultLauncher<Intent> getSubActivityResult = registerForActivityResult( new ActivityResultContracts.StartActivityForResult(),
-            result ->{
-                if(result.getResultCode() == RESULT_OK){
-                    //todo
-                }
-            }
-    );
 }
