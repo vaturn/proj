@@ -52,6 +52,7 @@ import com.kakao.vectormap.camera.CameraUpdateFactory;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 public class ReportActivity extends AppCompatActivity {
@@ -65,6 +66,8 @@ public class ReportActivity extends AppCompatActivity {
     private Button button4;
     private DatabaseReference mDatabase;
     private String category = null;
+    private String report_Title = null;
+    private String report_Content = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,6 +139,14 @@ public class ReportActivity extends AppCompatActivity {
                         category = "Other"; // 기타
                         break;
                 }
+            }
+        }, new ExpandableListAdapter.OnChild3DataListener() {
+            @Override
+            public void onChild3DataChanged(String title, String content) {
+                // 여기에서 title과 content를 처리합니다.
+                // 예: 전역 변수에 저장
+                report_Title = title;
+                report_Content = content;
             }
         });
         recyclerview.setAdapter(adapter);
@@ -231,8 +242,8 @@ public class ReportActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         //제목, 내용, 사건케이스 내용 넣어야함
                         String message = String.format(
-                                "제목: title\n위치: 위도 %.6f, 경도 %.6f\n신고 케이스: reportCase\n내용: content",
-                                selectedLatitude, selectedLongitude);
+                                "제목: %s\n위치: 위도 %.6f, 경도 %.6f\n신고 케이스: %s\n내용: %s",
+                                report_Title, selectedLatitude, selectedLongitude, category, report_Content);
                         reportTo119(message);
                         finish();
                     }

@@ -197,7 +197,7 @@ public class MapActivity extends AppCompatActivity {
         });
 
 
-        Button btn_address_search = findViewById(R.id.btn_current_location);
+        Button btn_address_search = findViewById(R.id.btn_address_search);
         final EditText et_address_search = findViewById(R.id.et_address_search);
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);

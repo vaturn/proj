@@ -4,16 +4,20 @@ import static android.content.Intent.getIntent;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -28,16 +32,21 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private List<Item> data;
 
     private OnChildItemClickListener childItemClickListener;
+    private OnChild3DataListener child3DataListener;
 
     // 인터페이스 정의
     public interface OnChildItemClickListener {
         void onChildItemClick();
         void onChild2ItemClick(int buttonId); // CHILD2 아이템 클릭을 위한 새로운 메소드
     }
+    public interface OnChild3DataListener {
+        void onChild3DataChanged(String title, String content);
+    }
 
-    public ExpandableListAdapter(List<Item> data, OnChildItemClickListener listener) {
+    public ExpandableListAdapter(List<Item> data, OnChildItemClickListener listener, OnChild3DataListener child3DataListener) {
         this.data = data;
         this.childItemClickListener = listener;
+        this.child3DataListener = child3DataListener;
     }
 
     @Override
@@ -161,60 +170,11 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
                         // 클릭 이벤트 처리
                         if (childItemClickListener != null) {
-                            childItemClickListener.onChild2ItemClick(v.getId());
+                            int buttonId = Arrays.asList(childHolder2.buttons).indexOf(v) + 1;
+                            childItemClickListener.onChild2ItemClick(buttonId);
                         }
                     }
                 };
-
-                childHolder2.btn_dan1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (childItemClickListener != null) {
-                            childItemClickListener.onChild2ItemClick(1); // 1은 버튼1에 대한 식별자
-                        }
-                    }
-                });
-                childHolder2.btn_dan2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (childItemClickListener != null) {
-                            childItemClickListener.onChild2ItemClick(2); // 2는 버튼2에 대한 식별자
-                        }
-                    }
-                });
-                childHolder2.btn_dan3.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (childItemClickListener != null) {
-                            childItemClickListener.onChild2ItemClick(3); // 2는 버튼2에 대한 식별자
-                        }
-                    }
-                });
-                childHolder2.btn_dan4.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (childItemClickListener != null) {
-                            childItemClickListener.onChild2ItemClick(4); // 2는 버튼2에 대한 식별자
-                        }
-                    }
-                });
-                childHolder2.btn_dan5.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (childItemClickListener != null) {
-                            childItemClickListener.onChild2ItemClick(2); // 2는 버튼2에 대한 식별자
-                        }
-                    }
-                });
-                childHolder2.btn_dan6.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (childItemClickListener != null) {
-                            childItemClickListener.onChild2ItemClick(2); // 2는 버튼2에 대한 식별자
-                        }
-                    }
-                });
-
                 for (Button button : childHolder2.buttons) {
                     button.setOnClickListener(buttonClickListener);
                 }
@@ -225,6 +185,47 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 childHolder3.refferalItem = item;
                 childHolder3.child_title.setText(item.text);
                 // Perform additional tasks for CHILD1, CHILD2, CHILD3 if needed
+
+                // EditText의 텍스트 변경 리스너 설정
+                childHolder3.reportTitle.addTextChangedListener(new TextWatcher() {
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                        // 이 메소드는 텍스트가 변경되기 전에 호출됩니다.
+                        // 여기에 코드를 작성하거나 비워 둘 수 있습니다.
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        // 이 메소드는 텍스트가 변경되는 동안 호출됩니다.
+                        // 여기에 코드를 작성하거나 비워 둘 수 있습니다.
+                    }
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        if (child3DataListener != null) {
+                            child3DataListener.onChild3DataChanged(s.toString(), childHolder3.reportContent.getText().toString());
+                        }
+                    }
+                    // beforeTextChanged와 onTextChanged 구현 생략
+                });
+
+                childHolder3.reportContent.addTextChangedListener(new TextWatcher() {
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                        // 이 메소드는 텍스트가 변경되기 전에 호출됩니다.
+                        // 여기에 코드를 작성하거나 비워 둘 수 있습니다.
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        // 이 메소드는 텍스트가 변경되는 동안 호출됩니다.
+                        // 여기에 코드를 작성하거나 비워 둘 수 있습니다.
+                    }
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        if (child3DataListener != null) {
+                            child3DataListener.onChild3DataChanged(childHolder3.reportTitle.getText().toString(), s.toString());
+                        }
+                    }
+                    // beforeTextChanged와 onTextChanged 구현 생략
+                });
                 break;
         }
     }
@@ -265,6 +266,8 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         public Button btn_dan6;
         public Item refferalItem;
         public Button[] buttons;
+        public EditText reportTitle;
+        public EditText reportContent;
         public ListChildViewHolder(View itemView) {
             super(itemView);
             child_title = (TextView) itemView.findViewById(R.id.child_title);
@@ -279,6 +282,9 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             buttons = new Button[] {
                     btn_dan1, btn_dan2, btn_dan3, btn_dan4, btn_dan5, btn_dan6
             };
+
+            reportTitle = itemView.findViewById(R.id.report_title);
+            reportContent = itemView.findViewById(R.id.report_content);
         }
     }
 
