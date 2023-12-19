@@ -1,5 +1,7 @@
 package com.kms.smartsiren;
 
+import java.util.ArrayList;
+
 public class UserAccount {
     private String emailID;
     private String password;
@@ -9,6 +11,7 @@ public class UserAccount {
     private int reportG;
     private double latitudeLast;
     private double longitudeLast;
+    private ArrayList<String> reportCase = new ArrayList<String>();
 
     public UserAccount(String emailID, String password, String name, int reliability, int reportN, int reportG) {
         this.emailID = emailID;
@@ -86,5 +89,22 @@ public class UserAccount {
         this.password = password;
     }
 
+    public ArrayList<String> getReportCase() {
+        return reportCase;
+    }
+
+    public void setReportCase(ArrayList<String> reportCase) {
+        this.reportCase = reportCase;
+    }
+
+    public void addReportCase(String reportId){
+        if(this.reportCase == null){
+            this.reportCase = new ArrayList<String>();
+        }
+        this.reportCase.add(reportId);
+    }
+
     public UserAccount() { } //빈 생성자 꼭 생성해야 DB접근 가능
+
+
 }

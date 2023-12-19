@@ -66,7 +66,7 @@ public class ReportActivity extends AppCompatActivity {
     private Button button4;
     private DatabaseReference mDatabase;
     private String category = null;
-    private String report_Title = null;
+    private String report_Title = "";
     private String report_Content = null;
 
     @Override
@@ -170,7 +170,7 @@ public class ReportActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             UserAccount child = dataSnapshot.getValue(UserAccount.class);
-                            UnconfirmedCase A = new UnconfirmedCase(selectedLatitude, selectedLongitude, category,2,"안녕",user.getUid(),String.valueOf(UUID.randomUUID()), child.getReliability());
+                            UnconfirmedCase A = new UnconfirmedCase(selectedLatitude, selectedLongitude, category,2,report_Title,user.getUid(),String.valueOf(UUID.randomUUID()), child.getReliability());
                             KNNAlgorithm MUC = new KNNAlgorithm();
                             MUC.startLabeling(A, new KNNAlgorithm.MyCallback(){
                                 @Override
@@ -182,14 +182,17 @@ public class ReportActivity extends AppCompatActivity {
                                     if(value.equals("NEW")){
                                         Log.e("사용자", "사건 등록 완료");
                                         mDatabase.child("Unconfirmed").child(A.getUuid()).setValue(A);
+                                        child.addReportCase(A.getUuid());
                                     }
                                     // 이미 존재하는 사건
                                     else{
+                                        child.addReportCase(value);
                                         if(depth == 0) {
                                             // 신뢰할 수 있는 사건이면 덮어쓰기 되어 아무 작용 안함
                                             child.setReportG(child.getReportG() + 1); // 잘한 신고
                                         }
                                         else{
+
                                             mDatabase.child("Unconfirmed").child(value).addListenerForSingleValueEvent(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -206,10 +209,11 @@ public class ReportActivity extends AppCompatActivity {
                                         }
 
                                     }
+                                    // 사용자 정보 덮어쓰기
+                                    mDatabase.child("UserInfo").child(user.getUid()).setValue(child);
+
                                 }
                             });
-                            // 사용자 정보 덮어쓰기
-                            mDatabase.child("UserInfo").child(user.getUid()).setValue(child);
 
                         }
 
