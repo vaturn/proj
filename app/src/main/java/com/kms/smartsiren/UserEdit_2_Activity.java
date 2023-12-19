@@ -9,18 +9,26 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class UserEdit_2_Activity extends AppCompatActivity {
 
     EditText et_nowPW, et_newPW, et_newPW_chk;
+    TextView tv_name, tv_email;
     Button btn_changePW, btn_user_withdraw;
     private FirebaseAuth mFirebaseAuth;
 
@@ -40,6 +48,9 @@ public class UserEdit_2_Activity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        tv_email = findViewById(R.id.text_DBemail);
+        tv_name = findViewById(R.id.text_DBname);
+
         et_nowPW = findViewById(R.id.et_nowPW);
         et_newPW = findViewById(R.id.et_newPW);
         et_newPW_chk = findViewById(R.id.et_newPW_chk);
@@ -47,7 +58,22 @@ public class UserEdit_2_Activity extends AppCompatActivity {
         btn_changePW = findViewById(R.id.btn_changePW);
         btn_user_withdraw = findViewById(R.id.btn_user_withdraw);
 
-        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("SmartSiren");
+        mDatabaseRef.child("UserInfo").child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserAccount userAccount = dataSnapshot.getValue(UserAccount.class);
+                tv_name.setText(userAccount.getName());
+                tv_email.setText(user.getEmail());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
         btn_changePW.setOnClickListener(new View.OnClickListener() {
             @Override

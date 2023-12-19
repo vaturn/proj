@@ -6,13 +6,16 @@ public class UnconfirmedCase extends CaseInfo{
     private int personnel; //인원 수
     ArrayList<String> informants;
 
+    private int reliability; // 신용도
+
     public UnconfirmedCase(){}
 
-    public UnconfirmedCase(double latitude, double longitude, String category, int rating, String detail, String informant, String uuid) {
+    public UnconfirmedCase(double latitude, double longitude, String category, int rating, String detail, String informant, String uuid, int reliability) {
         super(latitude, longitude, category, rating, detail, uuid);
         this.informants = new ArrayList<>();
         this.informants.add(informant);
         this.personnel = this.informants.size();
+        this.reliability = reliability;
     }
 
     public void addReport(double latitude, double longitude, String informant){
@@ -20,6 +23,14 @@ public class UnconfirmedCase extends CaseInfo{
         setLongitude( (getLongitude() * personnel + longitude) / (personnel + 1));
         personnel += 1;
         informants.add(informant);
+    }
+
+    public int getReliability() {
+        return reliability;
+    }
+
+    public void setReliability(int reliability) {
+        this.reliability = reliability;
     }
 
     public int getPersonnel() {

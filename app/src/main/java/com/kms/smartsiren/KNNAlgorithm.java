@@ -26,7 +26,7 @@ public class KNNAlgorithm {
     private static final double RADIUS_THRESHOLD = 10;
 
     public interface MyCallback {
-        void onCallback(String value);
+        void onCallback(String value, int depth);
     }
 
     public KNNAlgorithm(List<CaseInfo> trainingData) {
@@ -66,7 +66,6 @@ public class KNNAlgorithm {
             return "NEW";
         }
 
-        Log.e("pre", "end");
         // 그 외의 경우 가장 가까운 이웃의 레이블 반환
         return (nearestNeighbor.getUuid());
     }
@@ -76,10 +75,9 @@ public class KNNAlgorithm {
 
         Query mergeUnconQuery = databaseReference.child("Unconfirmed");
 
-        mergeUnconQuery.addValueEventListener(new ValueEventListener() {
+        mergeUnconQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.e("wvalue", "WHAT????");
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     // TODO: handle the post
                     CaseInfo child = postSnapshot.getValue(UnconfirmedCase.class);
@@ -87,7 +85,7 @@ public class KNNAlgorithm {
                 }
                 predict_label = predict(chk);
                 clearTrainingData();
-                myCallback.onCallback(predict_label);
+                myCallback.onCallback(predict_label, 0);
             }
 
             @Override
@@ -103,19 +101,17 @@ public class KNNAlgorithm {
         Query mergeCaseQuery = databaseReference.child("CaseInfo");
 
 
-        mergeCaseQuery.addValueEventListener(new ValueEventListener() {
+        mergeCaseQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.e("mvalue", "WHAT?");
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     // TODO: handle the post
                     CaseInfo child = postSnapshot.getValue(CaseInfo.class);
                     addTrainingData(child);
-                    Log.e("mvalue", "BBBBBB");
                 }
                 predict_label = predict(chk);
                 clearTrainingData();
-                myCallback.onCallback(predict_label);
+                myCallback.onCallback(predict_label, 0);
             }
 
             @Override
@@ -130,17 +126,17 @@ public class KNNAlgorithm {
         chk = pivot;
         readData(new MyCallback() {
             @Override
-            public void onCallback(String value) {
+            public void onCallback(String value, int depth) {
                 if(value.equals("NEW")){
                     readData_Un(new MyCallback() {
                         @Override
-                        public void onCallback(String value) {
-                            outCallback.onCallback(value);
+                        public void onCallback(String value, int depth) {
+                            outCallback.onCallback(value, 1);
                         }
                     });
                 }
                 else{
-                    outCallback.onCallback(value);
+                    outCallback.onCallback(value, 0);
                 }
             }
         });
