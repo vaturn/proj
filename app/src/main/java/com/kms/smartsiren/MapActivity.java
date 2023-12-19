@@ -557,7 +557,7 @@ public class MapActivity extends AppCompatActivity {
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
                 CaseInfo child = dataSnapshot.getValue(CaseInfo.class);
                 if(child != null){
-                    DangerLabelWave(LatLng.from(child.getLatitude(),child.getLongitude()), "Fire");
+                    DangerLabelWave(LatLng.from(child.getLatitude(),child.getLongitude()), child.getCategory());
                     fusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
                         @Override
                         public void onSuccess(Location location) {
