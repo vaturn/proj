@@ -145,7 +145,27 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             case CHILD2:
                 final ListChildViewHolder childHolder2 = (ListChildViewHolder) holder;
                 childHolder2.refferalItem = item;
-                // 예를 들어, CHILD2에 버튼이 여러 개 있다고 가정
+
+                View.OnClickListener buttonClickListener = new View.OnClickListener() {
+                    boolean isSelected = false; // 버튼 상태를 추적하는 변수
+
+                    @Override
+                    public void onClick(View v) {
+                        // 모든 버튼의 상태를 초기화
+                        for (Button button : childHolder2.buttons) {
+                            button.setSelected(false);
+                        }
+
+                        // 클릭된 버튼만 선택된 상태로 설정
+                        v.setSelected(true);
+
+                        // 클릭 이벤트 처리
+                        if (childItemClickListener != null) {
+                            childItemClickListener.onChild2ItemClick(v.getId());
+                        }
+                    }
+                };
+
                 childHolder2.btn_dan1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -195,6 +215,9 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     }
                 });
 
+                for (Button button : childHolder2.buttons) {
+                    button.setOnClickListener(buttonClickListener);
+                }
                 // ... 나머지 버튼들에 대해서도 동일하게 리스너를 설정 ...
                 break;
             case CHILD3:
@@ -241,7 +264,7 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         public Button btn_dan5;
         public Button btn_dan6;
         public Item refferalItem;
-
+        public Button[] buttons;
         public ListChildViewHolder(View itemView) {
             super(itemView);
             child_title = (TextView) itemView.findViewById(R.id.child_title);
@@ -253,6 +276,9 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             btn_dan4 = itemView.findViewById(R.id.btn_dan4);
             btn_dan5 = itemView.findViewById(R.id.btn_dan5);
             btn_dan6 = itemView.findViewById(R.id.btn_dan6);
+            buttons = new Button[] {
+                    btn_dan1, btn_dan2, btn_dan3, btn_dan4, btn_dan5, btn_dan6
+            };
         }
     }
 
