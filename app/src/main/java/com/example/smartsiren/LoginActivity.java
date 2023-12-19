@@ -2,9 +2,11 @@ package com.example.smartsiren;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,22 +33,22 @@ public class LoginActivity extends AppCompatActivity {
                 String email = et_email.getText().toString().trim();
                 String pwd = et_pwd.getText().toString().trim();
 
-                Intent intent = new Intent(getApplicationContext(), MapActivity.class);
-                startActivity(intent);
-                finish();
-//                if (TextUtils.isEmpty(enteredId) && TextUtils.isEmpty(enteredPw)) {
-//                    Toast.makeText(login.this, "이메일과 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
-//                } else if (TextUtils.isEmpty(enteredId)) {
-//                    Toast.makeText(login.this, "이메일을 입력해주세요.", Toast.LENGTH_SHORT).show();
-//                } else if (!isValidEmail(enteredId)) {
-//                    Toast.makeText(login.this, "올바른 이메일을 입력해주세요.", Toast.LENGTH_SHORT).show();
-//                } else if (TextUtils.isEmpty(enteredPw)) {
-//                    Toast.makeText(login.this, "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    Intent intent = new Intent(getApplicationContext(), map.class);
-//                    startActivity(intent);
-//                    finish();
-//                }
+//                Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+//                startActivity(intent);
+//                finish();
+                if (TextUtils.isEmpty(email) && TextUtils.isEmpty(email)) {
+                    Toast.makeText(LoginActivity.this, "이메일과 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                } else if (TextUtils.isEmpty(email)) {
+                    Toast.makeText(LoginActivity.this, "이메일을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                } else if (!isValidEmail(email)) {
+                    Toast.makeText(LoginActivity.this, "올바른 이메일을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                } else if (TextUtils.isEmpty(email)) {
+                    Toast.makeText(LoginActivity.this, "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 

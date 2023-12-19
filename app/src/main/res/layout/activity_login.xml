@@ -100,15 +100,15 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:src="@drawable/siren"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.176"
+        app:layout_constraintVertical_bias="0.211"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -118,13 +118,12 @@
         android:layout_marginBottom="78dp"
         android:text="SmartSiren"
         android:textAllCaps="true"
-        android:textSize="28dp"
+        android:textSize="32dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.300" />
+        app:layout_constraintVertical_bias="0.344" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

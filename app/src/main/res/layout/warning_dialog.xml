@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="330dp"
+        android:layout_height="100dp"
+        android:padding="19dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@android:color/holo_red_light"
+        app:srcCompat="@drawable/warning" />
+
+    <TextView
+        android:id="@+id/textView31"
+        android:layout_width="330dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="Warning!"
+        android:textColor="@color/material_dynamic_neutral20"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.326" />
+
+    <TextView
+        android:id="@+id/textView32"
+        android:layout_width="330dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="이 곳은 위험 지역입니다. \n 즉시 대피하여 안전한 장소 이동하세요."
+        android:textSize="13sp"
+        android:textStyle="bold" />
+
+    <Space
+        android:layout_width="330dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <android.widget.Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:text="확인"
+        android:textColor="@color/white" />
+
+    <Space
+        android:layout_width="330dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center_horizontal"/>
+
+
+</LinearLayout>
+
+

@@ -45,7 +45,50 @@
             app:layout_constraintVertical_bias="0.082" />
 
 
-        <!-- 현재 위치로 이동 버튼 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:padding="8dp">
+
+
+            <!-- 여유 공간 -->
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent" />
+
+
+            <!-- 검색 창 -->
+            <EditText
+                android:id="@+id/et_address_search"
+                android:layout_width="330dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/edittext"
+                android:hint="신고하실 주소를 검색하세요."
+                android:paddingStart="16dp"
+                android:textColorHint="#ff000000"
+                android:textSize="17dp" />
+
+            <!-- 여유 공간 -->
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent" />
+
+            <!-- 주소 검색 버튼 -->
+            <android.widget.Button
+                android:id="@+id/btn_address_search"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/search" />
+
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="505dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,48 +98,30 @@
             android:padding="8dp">
 
             <Space
-                android:layout_width="10dp"
+                android:layout_width="343dp"
                 android:layout_height="match_parent" />
 
-            <!-- 검색 창 -->
-            <EditText
-                android:id="@+id/et_address_search"
-                android:layout_width="0dp"
-                android:layout_height="46dp"
-                android:layout_weight="1"
-                android:background="@drawable/edittext"
-                android:hint="신고하실 주소를 검색하세요."
-                android:textColorHint="#ff000000"
-                android:paddingStart="16dp"
-                android:textSize="16dp" />
-
-            <!-- 여유 공간 -->
-            <Space
-                android:layout_width="10dp"
-                android:layout_height="match_parent" />
-
-            <!-- 검색 버튼 -->
+           <!-- 현재 위치로 이동 버튼 -->
             <android.widget.Button
                 android:id="@+id/btn_current_location"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:background="@drawable/gps" />
-
-        </LinearLayout>
+                android:layout_width="56dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/location" />
+    </LinearLayout>
 
         <android.widget.Button
             android:id="@+id/btn_report"
-            android:layout_width="313dp"
+            android:layout_width="320dp"
             android:layout_height="56dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="580dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/main_item_button"
             android:backgroundTint="@color/material_dynamic_primary30"
             android:text="위험 신고하기"
             android:textColor="#ffffff"
-            android:textSize="20sp"
+            android:textSize="22sp"
             android:textStyle="bold" />
-
 
     </LinearLayout>
 

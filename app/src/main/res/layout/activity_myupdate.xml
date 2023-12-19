@@ -9,17 +9,30 @@
 
     <TextView
         android:id="@+id/textView30"
-        android:layout_width="345dp"
-        android:layout_height="69dp"
-        android:text="여기에 신고정보(신고제목, 장소, 날짜 등) 표시할거임"
+        android:layout_width="156dp"
+        android:layout_height="29dp"
+        android:text="전체    건"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.283"
+        app:layout_constraintHorizontal_bias="0.098"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_DBnumber"
+        android:layout_width="25dp"
+        android:layout_height="31dp"
+        android:text="0"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.18"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.559" />
+        app:layout_constraintVertical_bias="0.503" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -181,6 +194,18 @@
         app:layout_constraintTop_toTopOf="@+id/toolbar"
         app:layout_constraintVertical_bias="0.22" />
 
+    <View
+        android:id="@+id/view4"
+        android:layout_width="360dp"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.372"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.534" />
+
     <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
@@ -206,6 +231,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar"
         app:layout_constraintVertical_bias="0.25" />
+
+    <TextView
+        android:id="@+id/textView34"
+        android:layout_width="292dp"
+        android:layout_height="26dp"
+        android:text="DB 회원 접수 기록 text"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.21"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.57" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

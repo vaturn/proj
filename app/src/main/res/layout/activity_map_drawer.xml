@@ -18,14 +18,14 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="114dp"
-            android:layout_height="115dp"
+            android:layout_width="109dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="83dp"
-            android:layout_marginEnd="83dp"
-            android:layout_marginBottom="626dp"
+            android:layout_marginEnd="88dp"
+            android:layout_marginBottom="625dp"
             android:background="@drawable/user"></ImageView>
 
         <TextView
@@ -75,28 +75,28 @@
             android:textSize="15dp"></TextView>
 
         <TextView
-            android:id="@+id/text_appguide"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="175dp"
-            android:layout_marginBottom="370dp"
-            android:onClick="OnClick"
-            android:text="앱 이용안내"
-            android:textColor="#000000"
-            android:textSize="16dp"></TextView>
-
-        <TextView
             android:id="@+id/text_myupdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="165dp"
-            android:layout_marginBottom="308dp"
+            android:layout_marginBottom="374dp"
             android:onClick="OnClick"
             android:text="나의신고현황"
+            android:textColor="#000000"
+            android:textSize="16dp"></TextView>
+
+        <TextView
+            android:id="@+id/text_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="197dp"
+            android:layout_marginBottom="251dp"
+            android:onClick="OnClick"
+            android:text="로그아웃"
             android:textColor="#000000"
             android:textSize="16dp"></TextView>
 
@@ -107,22 +107,9 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="167dp"
-            android:layout_marginBottom="246dp"
+            android:layout_marginBottom="312dp"
             android:onClick="OnClick"
             android:text="회원정보수정"
-            android:textColor="#000000"
-            android:textSize="16dp"></TextView>
-
-        <TextView
-            android:id="@+id/text_logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="196dp"
-            android:layout_marginBottom="185dp"
-            android:onClick="OnClick"
-            android:text="로그아웃"
             android:textColor="#000000"
             android:textSize="16dp"></TextView>
 

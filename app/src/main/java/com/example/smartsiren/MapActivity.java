@@ -2,6 +2,8 @@ package com.example.smartsiren;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,14 +41,7 @@ public class MapActivity extends AppCompatActivity {
             }
         });
 
-        TextView text_appguide = findViewById(R.id.text_appguide);
-        text_appguide.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MapActivity.this, AppguideActivity.class);
-                startActivity(intent);
-            }
-        });
+
 
         TextView text_useredit = findViewById(R.id.text_useredit);
         text_useredit.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +88,6 @@ public class MapActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 
     private void showLogoutConfirmationDialog() {
