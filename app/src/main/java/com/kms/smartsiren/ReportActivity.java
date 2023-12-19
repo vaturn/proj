@@ -64,6 +64,7 @@ public class ReportActivity extends AppCompatActivity {
     private RecyclerView recyclerview;
     private Button button4;
     private DatabaseReference mDatabase;
+    private String category = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,21 +113,27 @@ public class ReportActivity extends AppCompatActivity {
                 switch (buttonId) {
                     case 1:
                         // 버튼1 클릭 시 수행할 작업
+                        category = "Fire"; // 화재
                         break;
                     case 2:
                         // 버튼2 클릭 시 수행할 작업
+                        category = "Crush"; // 압사
                         break;
                     case 3:
                         // 버튼2 클릭 시 수행할 작업
+                        category = "Terror"; // 테러
                         break;
                     case 4:
                         // 버튼2 클릭 시 수행할 작업
+                        category = "Collapse"; // 붕괴
                         break;
                     case 5:
                         // 버튼2 클릭 시 수행할 작업
+                        category = "Flooding"; // 침수
                         break;
                     case 6:
                         // 버튼2 클릭 시 수행할 작업
+                        category = "Other"; // 기타
                         break;
                 }
             }
@@ -135,12 +142,16 @@ public class ReportActivity extends AppCompatActivity {
 
 
         // Handle button4 click event
-        button4 = findViewById(R.id.button4);
+        button4 = findViewById(R.id.btn_report);
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Switch to 'map' activity
                 // 위도와 경도가 선택되었는지 확인
+                if(category == null){
+                    Toast.makeText(ReportActivity.this, "사건 분류가 설정되지 않았습니다. 사건 분류를 선택해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if(selectedLatitude != null && selectedLongitude != null) {
                     // Show '신고 접수가 완료되었습니다.' popup
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -148,7 +159,7 @@ public class ReportActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             UserAccount child = dataSnapshot.getValue(UserAccount.class);
-                            UnconfirmedCase A = new UnconfirmedCase(selectedLatitude, selectedLongitude, "category",2,"안녕",user.getUid(),String.valueOf(UUID.randomUUID()), child.getReliability());
+                            UnconfirmedCase A = new UnconfirmedCase(selectedLatitude, selectedLongitude, category,2,"안녕",user.getUid(),String.valueOf(UUID.randomUUID()), child.getReliability());
                             KNNAlgorithm MUC = new KNNAlgorithm();
                             MUC.startLabeling(A, new KNNAlgorithm.MyCallback(){
                                 @Override
@@ -158,6 +169,7 @@ public class ReportActivity extends AppCompatActivity {
 
                                     // 새로운 사건
                                     if(value.equals("NEW")){
+                                        Log.e("사용자", "사건 등록 완료");
                                         mDatabase.child("Unconfirmed").child(A.getUuid()).setValue(A);
                                     }
                                     // 이미 존재하는 사건
