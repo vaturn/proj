@@ -156,29 +156,30 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 childHolder2.refferalItem = item;
 
                 View.OnClickListener buttonClickListener = new View.OnClickListener() {
-                    boolean isSelected = false; // 버튼 상태를 추적하는 변수
-
                     @Override
                     public void onClick(View v) {
-                        // 모든 버튼의 상태를 초기화
-                        for (Button button : childHolder2.buttons) {
-                            button.setSelected(false);
-                        }
+                        // 현재 버튼의 선택 상태를 토글
+                        boolean isSelected = v.isSelected();
+                        v.setSelected(!isSelected);
 
-                        // 클릭된 버튼만 선택된 상태로 설정
-                        v.setSelected(true);
+                        // 모든 버튼의 상태를 초기화 (현재 버튼 제외)
+                        for (Button button : childHolder2.buttons) {
+                            if (button != v) { // 현재 버튼은 상태 변경을 유지
+                                button.setSelected(false);
+                            }
+                        }
 
                         // 클릭 이벤트 처리
                         if (childItemClickListener != null) {
                             int buttonId = Arrays.asList(childHolder2.buttons).indexOf(v) + 1;
-                            childItemClickListener.onChild2ItemClick(buttonId);
+                            childItemClickListener.onChild2ItemClick(isSelected ? 0 : buttonId); // 선택 해제 시 0을 전달
                         }
                     }
                 };
+
                 for (Button button : childHolder2.buttons) {
                     button.setOnClickListener(buttonClickListener);
                 }
-                // ... 나머지 버튼들에 대해서도 동일하게 리스너를 설정 ...
                 break;
             case CHILD3:
                 final ListChildViewHolder childHolder3 = (ListChildViewHolder) holder;
