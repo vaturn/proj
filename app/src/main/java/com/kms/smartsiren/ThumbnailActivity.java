@@ -19,90 +19,16 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ThumbnailActivity extends AppCompatActivity {
 
-    private DatabaseReference mDatabaseRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thumbnail);
 
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("SmartSiren");
-
-
-        mDatabaseRef.child("Unconfirmed").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
-                UnconfirmedCase caseing = dataSnapshot.getValue(UnconfirmedCase.class);
-                if(caseing.getReliability() > RELIABILITY_CRITICAL_VALUE){
-                    mDatabaseRef.child("Unconfirmed").child(caseing.getUuid()).removeValue();
-                    CaseInfo a = new CaseInfo(caseing.getLatitude(), caseing.getLongitude(), caseing.getCategory(), caseing.getRating(), caseing.getDetail(), caseing.getUuid());
-                    mDatabaseRef.child("CaseInfo").child(caseing.getUuid()).setValue(a);
-                    for (String user : caseing.getInformants()){
-                        mDatabaseRef.child("UserInfo").child(user).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                UserAccount userac = dataSnapshot.getValue(UserAccount.class);
-                                userac.setReportG(userac.getReportG() + 1);
-                                userac.setReliability(getUserReliability(userac.getReportG(), userac.getReportN()));
-                                mDatabaseRef.child("UserInfo").child(user).setValue(userac);
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-                                // Getting Post failed, log a message
-                                // ...
-                            }
-                        });
-                    }
-                }
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName) {
-                UnconfirmedCase caseing = dataSnapshot.getValue(UnconfirmedCase.class);
-                if(caseing.getReliability() > RELIABILITY_CRITICAL_VALUE){
-                    mDatabaseRef.child("Unconfirmed").child(caseing.getUuid()).removeValue();
-                    CaseInfo a = new CaseInfo(caseing.getLatitude(), caseing.getLongitude(), caseing.getCategory(), caseing.getRating(), caseing.getDetail(), caseing.getUuid());
-                    mDatabaseRef.child("CaseInfo").child(caseing.getUuid()).setValue(a);
-
-                    mDatabaseRef.child("CaseInfo").child(caseing.getUuid()).setValue(a);
-                    for (String user : caseing.getInformants()){
-                        mDatabaseRef.child("UserInfo").child(user).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                UserAccount userac = dataSnapshot.getValue(UserAccount.class);
-                                userac.setReportG(userac.getReportG() + 1);
-                                userac.setReliability(getUserReliability(userac.getReportG(), userac.getReportN()));
-                                mDatabaseRef.child("UserInfo").child(user).setValue(userac);
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-                                // Getting Post failed, log a message
-                                // ...
-                            }
-                        });
-                    }
-                }
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String previousChildName) {
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(ThumbnailActivity.this, TestActivity.class);
+                Intent intent = new Intent(ThumbnailActivity.this, MapActivity.class);
                 startActivity(intent);
                 finish();
             }

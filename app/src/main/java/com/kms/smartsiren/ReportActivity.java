@@ -102,7 +102,7 @@ public class ReportActivity extends AppCompatActivity {
             public void onChildItemClick() {
                 // CHILD1 아이템 클릭 시 수행할 작업
                 Intent intent = new Intent(ReportActivity.this, ReportMapActivity.class);
-                someActivityResultLauncher.launch(intent);
+                startActivity(intent);
             }
         });
         recyclerview.setAdapter(adapter);
@@ -209,16 +209,4 @@ public class ReportActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    //B
-    private final ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                    Intent data = result.getData();
-                    selectedLatitude = data.getDoubleExtra("latitude", 0.0);
-                    selectedLongitude = data.getDoubleExtra("longitude", 0.0);
-                }
-            }
-    );
 }
