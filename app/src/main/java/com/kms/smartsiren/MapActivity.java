@@ -524,7 +524,7 @@ public class MapActivity extends AppCompatActivity {
     }
 
     private void showWarningDialog() {
-        toggleSiren();
+        playSiren();
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         View dialogView = getLayoutInflater().inflate(R.layout.warning_dialog, null);
 
@@ -536,7 +536,7 @@ public class MapActivity extends AppCompatActivity {
         dialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toggleSiren();
+                stopSiren();
                 alertDialog.dismiss();
             }
         });
@@ -546,18 +546,17 @@ public class MapActivity extends AppCompatActivity {
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         alertDialog.show();
     }
-
-    private void toggleSiren() {
+    private void playSiren() {
         if (mediaPlayer == null) {
-            mediaPlayer = MediaPlayer.create(this, R.raw.dangersound); // 'your_sound_file'을 실제 사운드 파일 이름으로 바꿔주세요.
+            mediaPlayer = MediaPlayer.create(this, R.raw.dangersound); // 'dangersound'을 실제 사운드 파일 이름으로 바꿔주세요.
         }
-
-        if (mediaPlayer.isPlaying()) {
+        mediaPlayer.start();
+    }
+    private void stopSiren() {
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
             mediaPlayer.stop();
             mediaPlayer.release();
             mediaPlayer = null;
-        } else {
-            mediaPlayer.start();
         }
     }
 
