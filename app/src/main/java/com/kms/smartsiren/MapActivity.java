@@ -15,11 +15,13 @@ import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
@@ -382,6 +384,12 @@ public class MapActivity extends AppCompatActivity {
                     centerLabel = labelLayer.addLabel(LabelOptions.from("centerLabel", LatLng.from(location.getLatitude(), location.getLongitude()))
                             .setStyles(LabelStyle.from(R.drawable.usercurrentlocation).setAnchorPoint(0.5f, 0.5f))
                             .setRank(1));
+
+                    FirebaseUser user = mFirebaseAuth.getCurrentUser();
+                    if(user == null)
+                        return;
+                    mDatabaseRef.child("UserInfo").child(user.getUid()).child("latitudeLast").setValue(location.getLatitude());
+                    mDatabaseRef.child("UserInfo").child(user.getUid()).child("longitudeLast").setValue(location.getLongitude());
                 }
             }
         });
@@ -472,9 +480,9 @@ public class MapActivity extends AppCompatActivity {
         reportCaseToPolygonStylesMap.put("Fire", PolygonStylesSet.from(PolygonStyles.from(Color.parseColor("#ff0000")))); // 화재, 빨강
         reportCaseToPolygonStylesMap.put("Crush", PolygonStylesSet.from(PolygonStyles.from(Color.parseColor("#FF8C00")))); // 압사, 다크오렌지
         reportCaseToPolygonStylesMap.put("Terror", PolygonStylesSet.from(PolygonStyles.from(Color.parseColor("#0000ff")))); // 테러, 어두운 빨강
-//        reportCaseToPolygonStylesMap.put("Collapse", PolygonStylesSet.from(PolygonStyles.from(Color.parseColor("A9A9A9")))); // 붕괴, 짙은 회색
-//        reportCaseToPolygonStylesMap.put("Flooding", PolygonStylesSet.from(PolygonStyles.from(Color.parseColor("#0000FF")))); // 침수, 파랑
-//        reportCaseToPolygonStylesMap.put("Other", PolygonStylesSet.from(PolygonStyles.from(Color.parseColor("#808080")))); // 그 외, 회색
+        reportCaseToPolygonStylesMap.put("Collapse", PolygonStylesSet.from(PolygonStyles.from(Color.parseColor("#A9A9A9")))); // 붕괴, 짙은 회색
+        reportCaseToPolygonStylesMap.put("Flooding", PolygonStylesSet.from(PolygonStyles.from(Color.parseColor("#0000FF")))); // 침수, 파랑
+        reportCaseToPolygonStylesMap.put("Other", PolygonStylesSet.from(PolygonStyles.from(Color.parseColor("#808080")))); // 그 외, 회색
         // 필요에 따라 추가 케이스를 여기에 추가
     }
 
@@ -513,6 +521,28 @@ public class MapActivity extends AppCompatActivity {
         }
     }
 
+    private void showWarningDialog() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        View dialogView = getLayoutInflater().inflate(R.layout.warning_dialog, null);
+
+
+        Button dialogButton = dialogView.findViewById(R.id.btn_OK);
+
+        dialogBuilder.setView(dialogView);
+        final AlertDialog alertDialog = dialogBuilder.create();
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+
+
+
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
+    }
+
     private void DBConnect(){
 
         // 데이터 베이스에서 위험지역 가져오기
@@ -522,11 +552,22 @@ public class MapActivity extends AppCompatActivity {
         Query mergeCaseQuery = databaseReference.child("CaseInfo");
 
         mergeCaseQuery.addChildEventListener(new ChildEventListener() {
+            @SuppressLint("MissingPermission")
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
                 CaseInfo child = dataSnapshot.getValue(CaseInfo.class);
                 if(child != null){
                     DangerLabelWave(LatLng.from(child.getLatitude(),child.getLongitude()), "Fire");
+                    fusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            LatLng.from(location.getLatitude(), location.getLongitude());
+                            if (HaversineTool.haversine(child.getLatitude(), child.getLongitude(), location.getLatitude(), location.getLongitude()) < 10000); {
+                                // 테스트 용 10KM 이내
+                                showWarningDialog();
+                            }
+                        }
+                    });
                 }
             }
 

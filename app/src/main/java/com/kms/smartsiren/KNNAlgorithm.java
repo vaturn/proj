@@ -23,7 +23,7 @@ public class KNNAlgorithm {
     private List<CaseInfo> trainingData = new ArrayList<CaseInfo>();
     public CaseInfo chk;
     public String predict_label = "NEW";
-    private static final double RADIUS_THRESHOLD = 10;
+    private static final double RADIUS_THRESHOLD = 1; // 1미터
 
     public interface MyCallback {
         void onCallback(String value, int depth);
@@ -124,6 +124,7 @@ public class KNNAlgorithm {
 
     public void startLabeling(CaseInfo pivot, MyCallback outCallback){
         chk = pivot;
+        Log.e("KNN", "Start");
         readData(new MyCallback() {
             @Override
             public void onCallback(String value, int depth) {

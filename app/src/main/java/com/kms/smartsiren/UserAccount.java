@@ -7,6 +7,8 @@ public class UserAccount {
     private int reliability;
     private int reportN;
     private int reportG;
+    private double latitudeLast;
+    private double longitudeLast;
 
     public UserAccount(String emailID, String password, String name, int reliability, int reportN, int reportG) {
         this.emailID = emailID;
@@ -15,6 +17,8 @@ public class UserAccount {
         this.reliability = reliability;
         this.reportN = reportN;
         this.reportG = reportG;
+        this.latitudeLast = 0;
+        this.longitudeLast = 0;
     }
 
     public int getReportG() {
@@ -34,6 +38,21 @@ public class UserAccount {
         this.reportN = reportN;
     }
 
+    public double getLatitudeLast() {
+        return latitudeLast;
+    }
+
+    public void setLatitudeLast(double latitudeLast) {
+        this.latitudeLast = latitudeLast;
+    }
+
+    public double getLongitudeLast() {
+        return longitudeLast;
+    }
+
+    public void setLongitudeLast(double longitudeLast) {
+        this.longitudeLast = longitudeLast;
+    }
 
     public int getReliability() {
         return reliability;
