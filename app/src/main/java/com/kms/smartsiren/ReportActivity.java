@@ -105,6 +105,31 @@ public class ReportActivity extends AppCompatActivity {
                 Intent intent = new Intent(ReportActivity.this, ReportMapActivity.class);
                 reportMapActivityResultLauncher.launch(intent);
             }
+            //각 케이스에 따른 버튼
+            @Override
+            public void onChild2ItemClick(int buttonId) {
+                // CHILD2 아이템 내의 버튼 클릭 시 수행할 작업
+                switch (buttonId) {
+                    case 1:
+                        // 버튼1 클릭 시 수행할 작업
+                        break;
+                    case 2:
+                        // 버튼2 클릭 시 수행할 작업
+                        break;
+                    case 3:
+                        // 버튼2 클릭 시 수행할 작업
+                        break;
+                    case 4:
+                        // 버튼2 클릭 시 수행할 작업
+                        break;
+                    case 5:
+                        // 버튼2 클릭 시 수행할 작업
+                        break;
+                    case 6:
+                        // 버튼2 클릭 시 수행할 작업
+                        break;
+                }
+            }
         });
         recyclerview.setAdapter(adapter);
 
@@ -229,7 +254,6 @@ public class ReportActivity extends AppCompatActivity {
                     Intent data = result.getData();
                     selectedLatitude = data.getDoubleExtra("latitude", 0.0);
                     selectedLongitude = data.getDoubleExtra("longitude", 0.0);
-
                 }
             }
     );

@@ -32,6 +32,7 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     // 인터페이스 정의
     public interface OnChildItemClickListener {
         void onChildItemClick();
+        void onChild2ItemClick(int buttonId); // CHILD2 아이템 클릭을 위한 새로운 메소드
     }
 
     public ExpandableListAdapter(List<Item> data, OnChildItemClickListener listener) {
@@ -142,6 +143,60 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 }
                 break;
             case CHILD2:
+                final ListChildViewHolder childHolder2 = (ListChildViewHolder) holder;
+                childHolder2.refferalItem = item;
+                // 예를 들어, CHILD2에 버튼이 여러 개 있다고 가정
+                childHolder2.btn_dan1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (childItemClickListener != null) {
+                            childItemClickListener.onChild2ItemClick(1); // 1은 버튼1에 대한 식별자
+                        }
+                    }
+                });
+                childHolder2.btn_dan2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (childItemClickListener != null) {
+                            childItemClickListener.onChild2ItemClick(2); // 2는 버튼2에 대한 식별자
+                        }
+                    }
+                });
+                childHolder2.btn_dan3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (childItemClickListener != null) {
+                            childItemClickListener.onChild2ItemClick(3); // 2는 버튼2에 대한 식별자
+                        }
+                    }
+                });
+                childHolder2.btn_dan4.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (childItemClickListener != null) {
+                            childItemClickListener.onChild2ItemClick(4); // 2는 버튼2에 대한 식별자
+                        }
+                    }
+                });
+                childHolder2.btn_dan5.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (childItemClickListener != null) {
+                            childItemClickListener.onChild2ItemClick(2); // 2는 버튼2에 대한 식별자
+                        }
+                    }
+                });
+                childHolder2.btn_dan6.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (childItemClickListener != null) {
+                            childItemClickListener.onChild2ItemClick(2); // 2는 버튼2에 대한 식별자
+                        }
+                    }
+                });
+
+                // ... 나머지 버튼들에 대해서도 동일하게 리스너를 설정 ...
+                break;
             case CHILD3:
                 final ListChildViewHolder childHolder3 = (ListChildViewHolder) holder;
                 childHolder3.refferalItem = item;
@@ -179,6 +234,12 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         public TextView child_title;
         //B
         public Button btn_reportMap;
+        public Button btn_dan1;
+        public Button btn_dan2;
+        public Button btn_dan3;
+        public Button btn_dan4;
+        public Button btn_dan5;
+        public Button btn_dan6;
         public Item refferalItem;
 
         public ListChildViewHolder(View itemView) {
@@ -186,6 +247,12 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             child_title = (TextView) itemView.findViewById(R.id.child_title);
             //B
             btn_reportMap = (Button) itemView.findViewById((R.id.btn_reportMap));
+            btn_dan1 = itemView.findViewById(R.id.btn_dan1);
+            btn_dan2 = itemView.findViewById(R.id.btn_dan2);
+            btn_dan3 = itemView.findViewById(R.id.btn_dan3);
+            btn_dan4 = itemView.findViewById(R.id.btn_dan4);
+            btn_dan5 = itemView.findViewById(R.id.btn_dan5);
+            btn_dan6 = itemView.findViewById(R.id.btn_dan6);
         }
     }
 
