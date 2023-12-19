@@ -162,7 +162,6 @@ public class ReportMapActivity extends AppCompatActivity {
             }
         });
     }
-
     private void ReportLocation() {
         kakaoMap.setOnCameraMoveEndListener(new KakaoMap.OnCameraMoveEndListener() {
             @Override
