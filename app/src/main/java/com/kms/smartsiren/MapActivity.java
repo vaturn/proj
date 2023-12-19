@@ -469,9 +469,12 @@ public class MapActivity extends AppCompatActivity {
 
     // 신고 케이스별 circlewave 색설정을 초기화하는 메소드
     private void createReportCaseToPolygonStylesMap() {
-        reportCaseToPolygonStylesMap.put("reportCase1", PolygonStylesSet.from(PolygonStyles.from(Color.parseColor("#ff0000")))); // 빨간색
-        reportCaseToPolygonStylesMap.put("reportCase2", PolygonStylesSet.from(PolygonStyles.from(Color.parseColor("#00ff00")))); // 초록색
-        reportCaseToPolygonStylesMap.put("reportCase3", PolygonStylesSet.from(PolygonStyles.from(Color.parseColor("#0000ff")))); // 파란색
+        reportCaseToPolygonStylesMap.put("Fire", PolygonStylesSet.from(PolygonStyles.from(Color.parseColor("#ff0000")))); // 화재, 빨강
+        reportCaseToPolygonStylesMap.put("Crush", PolygonStylesSet.from(PolygonStyles.from(Color.parseColor("#FF8C00")))); // 압사, 다크오렌지
+        reportCaseToPolygonStylesMap.put("Terror", PolygonStylesSet.from(PolygonStyles.from(Color.parseColor("#0000ff")))); // 테러, 어두운 빨강
+//        reportCaseToPolygonStylesMap.put("Collapse", PolygonStylesSet.from(PolygonStyles.from(Color.parseColor("A9A9A9")))); // 붕괴, 짙은 회색
+//        reportCaseToPolygonStylesMap.put("Flooding", PolygonStylesSet.from(PolygonStyles.from(Color.parseColor("#0000FF")))); // 침수, 파랑
+//        reportCaseToPolygonStylesMap.put("Other", PolygonStylesSet.from(PolygonStyles.from(Color.parseColor("#808080")))); // 그 외, 회색
         // 필요에 따라 추가 케이스를 여기에 추가
     }
 
@@ -492,7 +495,7 @@ public class MapActivity extends AppCompatActivity {
                                 .setStylesSet(reportCaseToPolygonStylesMap.get(reportCase)));
                 // circleWave 실제 생성 부분
                 CircleWaves circleWaves = CircleWaves.from("circleWaveAnim_"+ System.currentTimeMillis(),
-                                CircleWave.from(1, 0, 0, 200))
+                                CircleWave.from(1, 0, 0, 100))
                         .setHideShapeAtStop(false)
                         .setInterpolation(Interpolation.CubicInOut)
                         .setDuration(3000).setRepeatCount(1600);
@@ -523,7 +526,7 @@ public class MapActivity extends AppCompatActivity {
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
                 CaseInfo child = dataSnapshot.getValue(CaseInfo.class);
                 if(child != null){
-                    DangerLabelWave(LatLng.from(child.getLatitude(),child.getLongitude()), "reportCase1");
+                    DangerLabelWave(LatLng.from(child.getLatitude(),child.getLongitude()), "Fire");
                 }
             }
 
