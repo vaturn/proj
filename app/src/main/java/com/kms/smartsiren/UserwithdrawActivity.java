@@ -36,6 +36,8 @@ public class UserwithdrawActivity extends AppCompatActivity {
         btn_userwithdraw = findViewById(R.id.btn_userwithdraw);
         btn_agree = findViewById(R.id.btn_agree);
 
+        mFirebaseAuth = FirebaseAuth.getInstance();
+
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,6 +54,7 @@ public class UserwithdrawActivity extends AppCompatActivity {
                     mFirebaseAuth.getCurrentUser().delete();
                     Intent intent = new Intent(UserwithdrawActivity.this, LoginActivity.class);
                     startActivity(intent);
+                    finish();
                 } else {
                     // btn_agree가 false인 경우 안내 Toast 메시지 표시
                     Toast.makeText(UserwithdrawActivity.this, "안내를 확인해주세요.", Toast.LENGTH_SHORT).show();
