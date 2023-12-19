@@ -23,6 +23,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Looper;
 
@@ -115,6 +116,7 @@ public class MapActivity extends AppCompatActivity {
     private Map<String, PolygonStylesSet> reportCaseToPolygonStylesMap = new HashMap<>();
     private FirebaseAuth mFirebaseAuth;
     private DatabaseReference mDatabaseRef;
+    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -522,6 +524,7 @@ public class MapActivity extends AppCompatActivity {
     }
 
     private void showWarningDialog() {
+        toggleSiren();
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         View dialogView = getLayoutInflater().inflate(R.layout.warning_dialog, null);
 
@@ -533,6 +536,7 @@ public class MapActivity extends AppCompatActivity {
         dialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                toggleSiren();
                 alertDialog.dismiss();
             }
         });
@@ -541,6 +545,20 @@ public class MapActivity extends AppCompatActivity {
 
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         alertDialog.show();
+    }
+
+    private void toggleSiren() {
+        if (mediaPlayer == null) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.dangersound); // 'your_sound_file'을 실제 사운드 파일 이름으로 바꿔주세요.
+        }
+
+        if (mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = null;
+        } else {
+            mediaPlayer.start();
+        }
     }
 
     private void DBConnect(){
