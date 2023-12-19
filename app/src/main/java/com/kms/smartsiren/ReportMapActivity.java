@@ -154,7 +154,6 @@ public class ReportMapActivity extends AppCompatActivity {
                     //신고위치 지정 label
                     LabelStyles styles = kakaoMap.getLabelManager()
                             .addLabelStyles(LabelStyles.from(LabelStyle.from(R.drawable.red_marker).setAnchorPoint(0.5f, 0.5f)));
-
                     centerLabel = labelLayer.addLabel(LabelOptions.from("centerLabel", LatLng.from(location.getLatitude(), location.getLongitude()))
                             .setStyles(styles)
                             .setRank(1));
@@ -162,6 +161,7 @@ public class ReportMapActivity extends AppCompatActivity {
             }
         });
     }
+
     private void ReportLocation() {
         kakaoMap.setOnCameraMoveEndListener(new KakaoMap.OnCameraMoveEndListener() {
             @Override

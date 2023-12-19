@@ -171,7 +171,6 @@ public class ReportActivity extends AppCompatActivity {
                             // ...
                         }
                     });
-
                     showReportConfirmationDialog();
                 } else {
                     Toast.makeText(ReportActivity.this, "위치가 설정되지 않았습니다. 지도에서 위치를 선택해주세요.", Toast.LENGTH_SHORT).show();
@@ -223,7 +222,6 @@ public class ReportActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
     private final ActivityResultLauncher<Intent> reportMapActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
