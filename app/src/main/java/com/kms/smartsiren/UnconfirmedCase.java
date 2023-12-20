@@ -18,11 +18,12 @@ public class UnconfirmedCase extends CaseInfo{
         this.reliability = reliability;
     }
 
-    public void addReport(double latitude, double longitude, String informant){
+    public void addReport(double latitude, double longitude, String informant, int real){
         setLatitude( (getLatitude() * personnel + latitude) / (personnel + 1) );
         setLongitude( (getLongitude() * personnel + longitude) / (personnel + 1));
         personnel += 1;
         informants.add(informant);
+        setReliability(ReliabilityModel.getCaseReliability(getReliability(), real, personnel));
     }
 
     public int getReliability() {

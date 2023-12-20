@@ -4,7 +4,7 @@ public class ReliabilityModel {
     final static public int USER_RELIABILITY_DEFAULT = 400;
     final static public int TRUSTWORTHY_RANK_DEFAULT = 10000;
     final static public int RELIABILITY_CRITICAL_VALUE = 14;
-    final public int CRITICALSIZE = 3;
+    final public static int CRITICALSIZE = 3;
 
     public static int getUserReliability(int G, int N){
         if(N == 0)
@@ -15,7 +15,7 @@ public class ReliabilityModel {
 
         return (int)(prob * 100) + 50;
     }
-    public int getCaseReliability(int current, int additional, int size){
+    public static int getCaseReliability(int current, int additional, int size){
         double prob = (double) (current * (size - 1) + additional) / size;
 
         if(size >= CRITICALSIZE){

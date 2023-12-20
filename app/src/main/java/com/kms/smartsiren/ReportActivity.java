@@ -197,7 +197,7 @@ public class ReportActivity extends AppCompatActivity {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                     UnconfirmedCase caseing = dataSnapshot.getValue(UnconfirmedCase.class);
-                                                    caseing.addReport(selectedLatitude, selectedLongitude, user.getUid());
+                                                    caseing.addReport(selectedLatitude, selectedLongitude, user.getUid(), child.getReliability());
                                                     mDatabase.child("Unconfirmed").child(value).setValue(caseing);
                                                 }
                                                 @Override
