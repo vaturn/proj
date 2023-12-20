@@ -23,7 +23,7 @@ public class UnconfirmedCase extends CaseInfo{
         setLongitude( (getLongitude() * personnel + longitude) / (personnel + 1));
         personnel += 1;
         informants.add(informant);
-        setReliability(ReliabilityModel.getCaseReliability(getReliability(), real, personnel));
+        setReliability(ReliabilityModel.getCaseReliability(this.reliability, real, personnel));
     }
 
     public int getReliability() {

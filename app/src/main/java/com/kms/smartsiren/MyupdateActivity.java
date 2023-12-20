@@ -79,9 +79,6 @@ public class MyupdateActivity extends AppCompatActivity {
                     });
 
                 }
-
-
-
             }
 
             @Override
@@ -124,6 +121,11 @@ public class MyupdateActivity extends AppCompatActivity {
                 }
                 else{
                     CaseInfo caseInfo = snapshot.getValue(CaseInfo.class);
+                    if(caseInfo == null){
+                        return;
+                    }
+                    if(caseInfo.getCategory() == null)
+                        return;
                     myCallback.onCallback(caseInfo.getCategory(),caseInfo.getDetail());
                 }
             }

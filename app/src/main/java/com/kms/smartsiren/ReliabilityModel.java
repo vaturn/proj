@@ -3,7 +3,7 @@ package com.kms.smartsiren;
 public class ReliabilityModel {
     final static public int USER_RELIABILITY_DEFAULT = 400;
     final static public int TRUSTWORTHY_RANK_DEFAULT = 10000;
-    final static public int RELIABILITY_CRITICAL_VALUE = 14;
+    final static public int RELIABILITY_CRITICAL_VALUE = 200;
     final public static int CRITICALSIZE = 3;
 
     public static int getUserReliability(int G, int N){
@@ -11,8 +11,11 @@ public class ReliabilityModel {
             return USER_RELIABILITY_DEFAULT;
 
         int B = N - G;
-        double prob = (double) (G + 1) / (B + 1) * (G - B + N) / N;
 
+        double prob = (double) (G + 1) / (B + 1) * (G - B + N) / N;
+        if(B == -1 || prob < 0){
+            return (int) USER_RELIABILITY_DEFAULT;
+        }
         return (int)(prob * 100) + 50;
     }
     public static int getCaseReliability(int current, int additional, int size){

@@ -139,7 +139,7 @@ public class MapActivity extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 UserAccount userac = dataSnapshot.getValue(UserAccount.class);
-                                userac.setReportG(userac.getReportG() + 1);
+                                //userac.setReportG(userac.getReportG() + 1);
                                 userac.setReliability(getUserReliability(userac.getReportG(), userac.getReportN()));
                                 mDatabaseRef.child("UserInfo").child(user).setValue(userac);
                             }
@@ -168,7 +168,7 @@ public class MapActivity extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 UserAccount userac = dataSnapshot.getValue(UserAccount.class);
-                                userac.setReportG(userac.getReportG() + 1);
+                                //userac.setReportG(userac.getReportG() + 1);
                                 userac.setReliability(getUserReliability(userac.getReportG(), userac.getReportN()));
                                 mDatabaseRef.child("UserInfo").child(user).setValue(userac);
                             }
@@ -228,15 +228,6 @@ public class MapActivity extends AppCompatActivity {
                             }
                         })
                         .show();
-            }
-        });
-
-        TextView text_appguide = findViewById(R.id.text_appguide);
-        text_appguide.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MapActivity.this, AppguideActivity.class);
-                startActivity(intent);
             }
         });
 

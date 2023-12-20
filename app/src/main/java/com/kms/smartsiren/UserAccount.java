@@ -30,6 +30,8 @@ public class UserAccount {
 
     public void setReportG(int reportG) {
         this.reportG = reportG;
+        if(this.reportG > this.reportN)
+            this.reportG = this.reportN;
     }
 
 
