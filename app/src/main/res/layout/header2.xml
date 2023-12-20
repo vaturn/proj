@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="83dp"
+    android:layout_height="98dp"
     android:background="#FFFFFF">
 
     <View
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:text="STEP02"
         android:textColor="#000000"
-        android:textSize="8sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

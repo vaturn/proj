@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "854957116004",
-    "project_id": "smartsiren-a2bfd",
-    "storage_bucket": "smartsiren-a2bfd.appspot.com"
+    "project_number": "325015189886",
+    "project_id": "smartsiren-c5d77",
+    "storage_bucket": "smartsiren-c5d77.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:854957116004:android:1f4de5c0a63abfc5506d71",
+        "mobilesdk_app_id": "1:325015189886:android:cbae40a4431ca1bea09b2f",
         "android_client_info": {
-          "package_name": "com.example.myapplication"
+          "package_name": "com.kms.smartsiren"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDwUUtKnlmayFior4YyCBJqfydNLZSW6jo"
+          "current_key": "AIzaSyAkaAsnF2DS0XyN1X8M80d75rS3aMtUX48"
         }
       ],
       "services": {

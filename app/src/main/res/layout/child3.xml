@@ -7,11 +7,10 @@
     android:background="#FFFFFF">
 
     <EditText
-        android:id="@+id/tttt2"
+        android:id="@+id/report_content"
         android:layout_width="346dp"
         android:layout_height="157dp"
         android:background="@drawable/edittext_rounded_corner_rectangle"
-
         android:gravity="top"
         android:hint="신고 내용을 입력해주세요(500자 이내로 작성)"
         android:paddingStart="16dp"
@@ -25,7 +24,7 @@
         app:layout_constraintVertical_bias="0.827" />
 
     <EditText
-        android:id="@+id/tttt"
+        android:id="@+id/report_title"
         android:layout_width="346dp"
         android:layout_height="52dp"
         android:background="@drawable/edittext_rounded_corner_rectangle"
